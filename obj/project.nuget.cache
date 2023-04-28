@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "4LbDzZWQon0/Y3ZalGcXQE0oZCKcfiVaTdoZciRWOAsdgsgrz+F15XWTzl4NKswdEqFyt7lP4ksr0L4omLrkhw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ale_s\\source\\repos\\Projeto-Nemo\\Projeto-Nemo.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ale_s\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\ale_s\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\ale_s\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "C:\\Users\\ale_s\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "C:\\Users\\ale_s\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\ale_s\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
