@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace NEMO.Models
+namespace Projeto_Nemo.Models
 {
     public class Usuario
     {

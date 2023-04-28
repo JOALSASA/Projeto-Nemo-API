@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NEMO.Models;
+using Projeto_Nemo.Models;
 
-namespace WebApplication1.Data
+namespace Projeto_Nemo.Data
 {
     public class NemoDBContext : DbContext
     {

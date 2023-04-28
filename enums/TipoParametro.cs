@@ -1,4 +1,4 @@
-﻿namespace NEMO.enums
+﻿namespace Projeto_Nemo.enums
 {
     public enum TipoParametro
     {
