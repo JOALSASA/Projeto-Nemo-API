@@ -1,4 +1,4 @@
-﻿namespace Projeto_Nemo.enums
+﻿namespace Projeto_Nemo.Models.Enums
 {
     public enum TipoParametro
     {

@@ -1,6 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Projeto_Nemo.Data;
+using Projeto_Nemo.Repositories;
+using Projeto_Nemo.Repositories.Interfaces;
+using Projeto_Nemo.Services;
+using Projeto_Nemo.Services.Interfaces;
 
 namespace Projeto_Nemo
 {
@@ -17,7 +21,15 @@ namespace Projeto_Nemo
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddDbContext<NemoDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DevelopmentConnection")));
+            builder.Services.AddDbContext<NemoDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase")));
+
+            // Repositories
+            builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            builder.Services.AddScoped<IAquarioRepository, AquarioRepository>();
+
+            // Services
+            builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+            builder.Services.AddScoped<IAquarioService, AquarioService>();
 
             var app = builder.Build();
 
@@ -29,11 +41,8 @@ namespace Projeto_Nemo
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
             app.MapControllers();
-
             app.Run();
         }
     }
