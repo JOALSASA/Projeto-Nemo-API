@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using Microsoft.OpenApi.Models;
 using Projeto_Nemo.Data;
 using Projeto_Nemo.Repositories;
 using Projeto_Nemo.Repositories.Interfaces;
@@ -19,7 +19,15 @@ namespace Projeto_Nemo
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Nemo API",
+                    Description = "Uma API Web em ASP.NET para gerenciar aquários",
+                });
+            });
 
             builder.Services.AddDbContext<NemoDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase")));
 
