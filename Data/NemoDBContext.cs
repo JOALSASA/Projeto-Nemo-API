@@ -12,6 +12,7 @@ namespace Projeto_Nemo.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Configurações de Entidade
             modelBuilder.Entity<AquarioParametro>()
                 .HasOne(a => a.Aquario)
                 .WithMany(ap => ap.AquarioParametros)
@@ -39,6 +40,11 @@ namespace Projeto_Nemo.Data
                 .HasMany(u => u.ListaHistoricos)
                 .WithOne(h => h.Usuario)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Usuario>().HasIndex(u => u.NomeUsuario).IsUnique();
+
+            // Configurações de propriedades
+            modelBuilder.Entity<Usuario>().Property(u => u.NomeUsuario).HasMaxLength(100).IsRequired();
         }
 
         public DbSet<Aquario> Aquarios { get; set; }
