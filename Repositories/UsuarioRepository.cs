@@ -32,9 +32,11 @@ namespace Projeto_Nemo.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Usuario> Inserir(Usuario usuario)
+        public Usuario Inserir(Usuario usuario)
         {
-            throw new NotImplementedException();
+            _dbContext.Add(usuario);
+            _dbContext.SaveChanges();
+            return usuario;
         }
     }
 }

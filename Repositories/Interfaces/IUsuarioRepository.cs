@@ -8,7 +8,7 @@ namespace Projeto_Nemo.Repositories.Interfaces
 {
     public interface IUsuarioRepository
     {
-        Task<Usuario> Inserir(Usuario usuario);
+        Usuario Inserir(Usuario usuario);
         Task<Usuario> Alterar(Usuario usuario);
         Task<Usuario> Excluir(Usuario usuario);
         Task<Usuario> FindUsuarioById(int id);
