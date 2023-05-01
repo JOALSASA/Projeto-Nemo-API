@@ -6,9 +6,9 @@ namespace Projeto_Nemo.Repositories
 {
     public class AquarioRepository : IAquarioRepository
     {
-        private readonly NemoDBContext _dbContext;
+        private readonly NemoDbContext _dbContext;
 
-        public AquarioRepository(NemoDBContext dbContext)
+        public AquarioRepository(NemoDbContext dbContext)
         {
             _dbContext = dbContext;
         }

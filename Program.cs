@@ -26,11 +26,11 @@ namespace Projeto_Nemo
                 {
                     Version = "v1",
                     Title = "Nemo API",
-                    Description = "Uma API Web em ASP.NET para gerenciar aqu�rios",
+                    Description = "Uma API Web em ASP.NET para gerenciar aquários",
                 });
             });
 
-            builder.Services.AddDbContext<NemoDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase")));
+            builder.Services.AddDbContext<NemoDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase")));
 
             // Repositories
             builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();

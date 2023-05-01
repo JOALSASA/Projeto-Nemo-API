@@ -10,7 +10,7 @@ using Projeto_Nemo.Data;
 
 namespace Projeto_Nemo.Migrations
 {
-    [DbContext(typeof(NemoDBContext))]
+    [DbContext(typeof(NemoDbContext))]
     partial class NemoDBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

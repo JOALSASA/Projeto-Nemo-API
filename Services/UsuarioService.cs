@@ -1,4 +1,4 @@
-﻿using Projeto_Nemo.Models;
+using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Dto;
 using Projeto_Nemo.Repositories.Interfaces;
 using Projeto_Nemo.Services.Interfaces;
@@ -8,6 +8,7 @@ namespace Projeto_Nemo.Services
     public class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioRepository _usuarioRepository;
+
         public UsuarioService(IUsuarioRepository usuarioRepository)
         {
             _usuarioRepository = usuarioRepository;
@@ -28,19 +29,26 @@ namespace Projeto_Nemo.Services
             throw new NotImplementedException();
         }
 
-        public Usuario FindUsuarioById(int id)
+        public UsuarioDto FindUsuarioById(int id)
         {
-            throw new NotImplementedException();
+            var usuario = _usuarioRepository.FindUsuarioById(id);
+            if (usuario == null)
+            {
+                throw new Exception("Usuário não encontrado");
+            }
+
+            return new UsuarioDto(usuario);
         }
 
         public List<UsuarioDto> FindUsuarioByNome(string nome)
         {
             List<UsuarioDto> listaUsuarioDtos = new List<UsuarioDto>();
             List<Usuario> listaUsuarios = _usuarioRepository.FindUsuarioByNome(nome);
-            foreach (var u in listaUsuarios)
+            foreach (var usuario in listaUsuarios)
             {
-                listaUsuarioDtos.Add(UsuarioDto.CriarUsuarioDto(u));
+                listaUsuarioDtos.Add(new UsuarioDto(usuario));
             }
+
             return listaUsuarioDtos;
         }
     }

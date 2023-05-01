@@ -1,18 +1,15 @@
-﻿namespace Projeto_Nemo.Models.Dto;
-
-public class UsuarioDto
+namespace Projeto_Nemo.Models.Dto
 {
-    public UsuarioDto()
-    {}
-
-    public int Id { get; set; }
-    public String NomeUsuario { get; set; } = null!;
-
-    public static UsuarioDto CriarUsuarioDto(Usuario usuario)
+    public class UsuarioDto
     {
-        UsuarioDto novoDto = new UsuarioDto();
-        novoDto.NomeUsuario = usuario.NomeUsuario;
-        novoDto.Id = usuario.Id;
-        return novoDto;
+        public int Id { get; set; }
+        public String NomeUsuario { get; set; } = null!;
+
+        public UsuarioDto(Usuario usuario)
+        {
+            Id = usuario.Id;
+            NomeUsuario = usuario.NomeUsuario;
+        }
+
     }
 }
