@@ -6,9 +6,9 @@ namespace Projeto_Nemo.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        private readonly NemoDBContext _dbContext;
+        private readonly NemoDbContext _dbContext;
 
-        public UsuarioRepository(NemoDBContext dbContext)
+        public UsuarioRepository(NemoDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -23,7 +23,7 @@ namespace Projeto_Nemo.Repositories
             throw new NotImplementedException();
         }
 
-        public Usuario FindUsuarioById(int id)
+        public Usuario? FindUsuarioById(int id)
         {
             return _dbContext.Usuarios.Find(id);
         }

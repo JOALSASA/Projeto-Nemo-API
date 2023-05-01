@@ -3,9 +3,9 @@ using Projeto_Nemo.Models;
 
 namespace Projeto_Nemo.Data
 {
-    public class NemoDBContext : DbContext
+    public class NemoDbContext : DbContext
     {
-        public NemoDBContext(DbContextOptions<NemoDBContext> options)
+        public NemoDbContext(DbContextOptions<NemoDbContext> options)
            : base(options)
         {
         }

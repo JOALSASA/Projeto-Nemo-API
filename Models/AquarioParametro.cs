@@ -1,7 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace Projeto_Nemo.Models
+﻿namespace Projeto_Nemo.Models
 {
     public class AquarioParametro
     {

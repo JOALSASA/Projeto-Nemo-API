@@ -8,7 +8,7 @@ namespace Projeto_Nemo.Services.Interfaces
         Usuario Inserir(Usuario usuario);
         Usuario Alterar(Usuario usuario);
         Usuario Excluir(Usuario usuario);
-        Usuario FindUsuarioById(int id);
+        UsuarioDto FindUsuarioById(int id);
         List<UsuarioDto> FindUsuarioByNome(string nome);
     }
 }

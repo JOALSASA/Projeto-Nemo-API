@@ -1,4 +1,3 @@
-using Microsoft.IdentityModel.Tokens;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Dto;
 using Projeto_Nemo.Repositories.Interfaces;
@@ -9,6 +8,7 @@ namespace Projeto_Nemo.Services
     public class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioRepository _usuarioRepository;
+
         public UsuarioService(IUsuarioRepository usuarioRepository)
         {
             _usuarioRepository = usuarioRepository;
@@ -32,23 +32,23 @@ namespace Projeto_Nemo.Services
         public UsuarioDto FindUsuarioById(int id)
         {
             var usuario = _usuarioRepository.FindUsuarioById(id);
-
-            if (usuario != null)
+            if (usuario == null)
             {
-                return new UsuarioDto(usuario);
+                throw new Exception("Usuário não encontrado");
             }
 
-            return null;
+            return new UsuarioDto(usuario);
         }
 
         public List<UsuarioDto> FindUsuarioByNome(string nome)
         {
             List<UsuarioDto> listaUsuarioDtos = new List<UsuarioDto>();
             List<Usuario> listaUsuarios = _usuarioRepository.FindUsuarioByNome(nome);
-            foreach (var u in listaUsuarios)
+            foreach (var usuario in listaUsuarios)
             {
-                listaUsuarioDtos.Add(UsuarioDto.CriarUsuarioDto(u));
+                listaUsuarioDtos.Add(new UsuarioDto(usuario));
             }
+
             return listaUsuarioDtos;
         }
     }

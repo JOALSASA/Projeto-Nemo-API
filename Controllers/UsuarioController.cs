@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Dto;
 using Projeto_Nemo.Services.Interfaces;
 
@@ -25,11 +23,10 @@ namespace Projeto_Nemo.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<UsuarioDto> buscarPorId(int id)
+        public ActionResult<UsuarioDto> BuscarPorId(int id)
         {
             var usuarioDto = _usuarioService.FindUsuarioById(id);
-
-            return usuarioDto == null ? NotFound() : Ok(usuarioDto);
+            return Ok(usuarioDto);
         }
         
         [HttpGet]
