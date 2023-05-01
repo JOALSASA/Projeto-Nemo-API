@@ -1,12 +1,13 @@
 ﻿using System.Net;
 using System.Text.Json;
+using Projeto_Nemo.Exceptions;
 
 namespace Projeto_Nemo.Controllers.Middleware;
 
 public class GlobalErrorHandlingMiddleware
 {
     private readonly RequestDelegate _next;
-    
+
     public GlobalErrorHandlingMiddleware(RequestDelegate next)
     {
         _next = next;
@@ -20,29 +21,32 @@ public class GlobalErrorHandlingMiddleware
         }
         catch (Exception ex)
         {
-            await handleExceptionAsync(context, ex);
+            await HandleExceptionAsync(context, ex);
         }
-        
-        
     }
 
-    private static Task handleExceptionAsync(HttpContext context, Exception exception)
+    // TODO: Logar o stackTrace da aplicação
+    private static Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        HttpStatusCode status;
-        // TODO: Logar o stackTrace da aplicação
-        string stackTrace = String.Empty;
+        // Tratamento default
         string mensagem;
-        var exceptionType = exception.GetType();
+        HttpStatusCode status;
 
-        // TODO: Adicionar o restante das exceções aqui
+        try
+        {
+            var baseException = (BaseException)exception;
+            mensagem = baseException.Message;
+            status = baseException.Status;
+        }
+        catch (Exception _)
+        {
+            mensagem = exception.Message;
+            status = HttpStatusCode.InternalServerError;
+        }
         
-        // Trata default
-        mensagem = exception.Message;
-        status = HttpStatusCode.InternalServerError;
-
         var response = JsonSerializer.Serialize(new { mensagem, status });
         context.Response.ContentType = "application/json";
-        context.Response.StatusCode = (int) status;
+        context.Response.StatusCode = (int)status;
         return context.Response.WriteAsync(response);
     }
 }
