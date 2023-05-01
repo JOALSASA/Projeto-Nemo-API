@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Projeto_Nemo.Controllers.Middleware;
 using Projeto_Nemo.Data;
 using Projeto_Nemo.Repositories;
 using Projeto_Nemo.Repositories.Interfaces;
@@ -25,7 +26,7 @@ namespace Projeto_Nemo
                 {
                     Version = "v1",
                     Title = "Nemo API",
-                    Description = "Uma API Web em ASP.NET para gerenciar aquários",
+                    Description = "Uma API Web em ASP.NET para gerenciar aquï¿½rios",
                 });
             });
 
@@ -47,6 +48,8 @@ namespace Projeto_Nemo
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
 
             app.UseHttpsRedirection();
             app.UseAuthorization();
