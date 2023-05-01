@@ -33,9 +33,9 @@ namespace Projeto_Nemo.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<Usuario> FindUsuarioByNome(string nome)
+        public List<Usuario> FindUsuarioByNome(string nome)
         {
-            return await _dbContext.Usuarios.FirstAsync(x => x.NomeUsuario == nome);
+            return _dbContext.Usuarios.Where(u => u.NomeUsuario.Contains(nome)).ToList();
         }
 
         public Task<Usuario> Inserir(Usuario usuario)
