@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Dto;
 using Projeto_Nemo.Services.Interfaces;
 
@@ -15,9 +17,8 @@ namespace Projeto_Nemo.Controllers
         {
             _usuarioService = usuarioService;
         }
-
         [HttpPost]
-        public void cadastrarUsuario(NovoUsuarioForm usuarioForm) {
+        public void CadastrarUsuario(NovoUsuarioForm usuarioForm) {
 
         }
         
@@ -29,6 +30,14 @@ namespace Projeto_Nemo.Controllers
             var usuarioDto = _usuarioService.FindUsuarioById(id);
 
             return usuarioDto == null ? NotFound() : Ok(usuarioDto);
+        }
+        
+        [HttpGet]
+        [Route("consultar")]
+        public IActionResult  FindUsuarioNome(string nome)
+        {
+            List<UsuarioDto> usuarios = _usuarioService.FindUsuarioByNome(nome);
+            return Ok(usuarios);
         }
         
     }

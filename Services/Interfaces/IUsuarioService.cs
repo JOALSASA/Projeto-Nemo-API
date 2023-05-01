@@ -1,9 +1,14 @@
-﻿using Projeto_Nemo.Models.Dto;
+using Projeto_Nemo.Models;
+using Projeto_Nemo.Models.Dto;
 
 namespace Projeto_Nemo.Services.Interfaces
 {
     public interface IUsuarioService
     {
-        UsuarioDto FindUsuarioById(int id);
+        Usuario Inserir(Usuario usuario);
+        Usuario Alterar(Usuario usuario);
+        Usuario Excluir(Usuario usuario);
+        Usuario FindUsuarioById(int id);
+        List<UsuarioDto> FindUsuarioByNome(string nome);
     }
 }

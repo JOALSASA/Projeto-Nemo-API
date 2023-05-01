@@ -1,4 +1,4 @@
-﻿namespace Projeto_Nemo.Models.Dto
+namespace Projeto_Nemo.Models.Dto
 {
     public class UsuarioDto
     {

@@ -27,6 +27,11 @@ namespace Projeto_Nemo.Repositories
         {
             return _dbContext.Usuarios.Find(id);
         }
+        
+        public List<Usuario> FindUsuarioByNome(string nome)
+        {
+            return _dbContext.Usuarios.Where(u => u.NomeUsuario.Contains(nome)).ToList();
+        }
 
         public Usuario Inserir(Usuario usuario)
         {
