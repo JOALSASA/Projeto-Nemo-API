@@ -31,11 +31,6 @@ namespace Projeto_Nemo.Controllers
         public IActionResult  FindUsuarioNome(string nome)
         {
             List<UsuarioDto> usuarios = _usuarioService.FindUsuarioByNome(nome);
-            if (usuarios.IsNullOrEmpty())
-            {
-                return NotFound("Nenhum usuário encontrado!");
-            }
-
             return Ok(usuarios);
         }
     }
