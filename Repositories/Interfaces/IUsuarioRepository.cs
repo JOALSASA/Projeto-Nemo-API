@@ -12,5 +12,6 @@ namespace Projeto_Nemo.Repositories.Interfaces
         Task<Usuario> Alterar(Usuario usuario);
         Task<Usuario> Excluir(Usuario usuario);
         Task<Usuario> FindUsuarioById(int id);
+        List<Usuario> FindUsuarioByNome(string name);
     }
 }

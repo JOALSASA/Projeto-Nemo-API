@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Projeto_Nemo.Data;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Repositories.Interfaces;
@@ -30,6 +31,11 @@ namespace Projeto_Nemo.Repositories
         public Task<Usuario> FindUsuarioById(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Usuario> FindUsuarioByNome(string nome)
+        {
+            return _dbContext.Usuarios.Where(u => u.NomeUsuario.Contains(nome)).ToList();
         }
 
         public Task<Usuario> Inserir(Usuario usuario)
