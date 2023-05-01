@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Text.Json;
+using Projeto_Nemo.Exceptions;
 
 namespace Projeto_Nemo.Controllers.Middleware;
 

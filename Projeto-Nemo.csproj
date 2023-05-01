@@ -27,19 +27,6 @@
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Remove="Exceptions\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Exceptions\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Remove="Exceptions\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Exceptions\**" />
   </ItemGroup>
 
 </Project>

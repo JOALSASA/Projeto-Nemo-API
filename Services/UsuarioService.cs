@@ -1,3 +1,4 @@
+using Projeto_Nemo.Exceptions;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Dto;
 using Projeto_Nemo.Repositories.Interfaces;
@@ -34,7 +35,7 @@ namespace Projeto_Nemo.Services
             var usuario = _usuarioRepository.FindUsuarioById(id);
             if (usuario == null)
             {
-                throw new Exception("Usuário não encontrado");
+                throw new NotFoundException("Usuário não encontrado.");
             }
 
             return new UsuarioDto(usuario);
