@@ -7,7 +7,7 @@ namespace Projeto_Nemo.Services.Interfaces
     {
         Usuario Inserir(Usuario usuario);
         Usuario Alterar(Usuario usuario);
-        Usuario Excluir(Usuario usuario);
+        bool Excluir(NovoUsuarioForm usuario);
         Usuario FindUsuarioById(int id);
         Usuario FindUsuarioByNome(string nome);
     }

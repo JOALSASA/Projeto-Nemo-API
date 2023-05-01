@@ -22,15 +22,16 @@ namespace Projeto_Nemo.Services
         {
             throw new NotImplementedException();
         }
-
-        public Usuario Excluir(NovoUsuarioForm usuario)
+        
+        public bool Excluir(NovoUsuarioForm usuario)
         {
-            throw new NotImplementedException();
-        }
-
-        public Usuario Excluir(Usuario usuario)
-        {
-            throw new NotImplementedException();
+            Task<Usuario> usu = _usuarioRepository.FindUsuarioByNome(usuario.NomeUsuario);
+            if (usu == null)
+            {
+                throw new Exception("Usuário não encontrado!");
+            }
+            _usuarioRepository.Excluir(usu.Result);
+            return true;
         }
 
         public Usuario FindUsuarioById(int id)

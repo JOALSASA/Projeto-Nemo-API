@@ -31,5 +31,12 @@ namespace Projeto_Nemo.Controllers
             Usuario usuario = _usuarioService.FindUsuarioByNome(nome);
             return usuario;
         }
+        
+        [HttpDelete]
+        public IActionResult ExcluirUsuario(NovoUsuarioForm usuarioForm)
+        {
+            _usuarioService.Excluir(usuarioForm);
+            return Ok("Usuário deletado com sucesso!");
+        }
     }
 }

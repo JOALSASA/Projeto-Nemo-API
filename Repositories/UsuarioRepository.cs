@@ -23,9 +23,11 @@ namespace Projeto_Nemo.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Usuario> Excluir(Usuario usuario)
+        public bool Excluir(Usuario usuario)
         {
-            throw new NotImplementedException();
+            _dbContext.Usuarios.Remove(usuario);
+            _dbContext.SaveChangesAsync();
+            return true;
         }
 
         public Task<Usuario> FindUsuarioById(int id)
