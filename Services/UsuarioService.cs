@@ -1,5 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using Projeto_Nemo.Models;
+﻿using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Dto;
 using Projeto_Nemo.Repositories.Interfaces;
 using Projeto_Nemo.Services.Interfaces;

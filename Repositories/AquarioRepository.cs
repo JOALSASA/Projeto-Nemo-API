@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Projeto_Nemo.Data;
+﻿using Projeto_Nemo.Data;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Repositories.Interfaces;
 

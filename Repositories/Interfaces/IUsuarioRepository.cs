@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Projeto_Nemo.Models;
 
 namespace Projeto_Nemo.Repositories.Interfaces
