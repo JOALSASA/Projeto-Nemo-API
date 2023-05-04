@@ -11,7 +11,7 @@ using Projeto_Nemo.Data;
 
 namespace Projeto_Nemo.Migrations
 {
-    [DbContext(typeof(NemoDBContext))]
+    [DbContext(typeof(NemoDbContext))]
     [Migration("20230428013245_initialDB")]
     partial class initialDB
     {

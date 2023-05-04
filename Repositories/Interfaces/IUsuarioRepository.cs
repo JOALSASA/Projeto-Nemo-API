@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Projeto_Nemo.Models;
 
 namespace Projeto_Nemo.Repositories.Interfaces
@@ -9,8 +5,9 @@ namespace Projeto_Nemo.Repositories.Interfaces
     public interface IUsuarioRepository
     {
         Usuario Inserir(Usuario usuario);
-        Task<Usuario> Alterar(Usuario usuario);
-        Task<Usuario> Excluir(Usuario usuario);
-        Task<Usuario> FindUsuarioById(int id);
+        Usuario Alterar(Usuario usuario);
+        Usuario Excluir(Usuario usuario);
+        Usuario? FindUsuarioById(int id);
+        List<Usuario> FindUsuarioByNome(string name);
     }
 }

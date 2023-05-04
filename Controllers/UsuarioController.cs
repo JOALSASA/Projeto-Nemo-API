@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Projeto_Nemo.Models.Dto;
 using Projeto_Nemo.Services.Interfaces;
@@ -12,18 +8,40 @@ namespace Projeto_Nemo.Controllers
     [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
     {
+
         private readonly IUsuarioService _usuarioService;
 
         public UsuarioController(IUsuarioService usuarioService)
         {
             _usuarioService = usuarioService;
         }
+        [HttpPost]
+        public void CadastrarUsuario(NovoUsuarioForm usuarioForm) {
 
+        }
+        
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<UsuarioDto> BuscarPorId(int id)
+        {
+            var usuarioDto = _usuarioService.FindUsuarioById(id);
+            return Ok(usuarioDto);
+        }
+        
+        [HttpGet]
+        [Route("consultar")]
+        public IActionResult  FindUsuarioNome(string nome)
+        {
+            List<UsuarioDto> usuarios = _usuarioService.FindUsuarioByNome(nome);
+            return Ok(usuarios);
+        }
+        
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioDto))]
         public ActionResult<UsuarioDto> cadastrarUsuario([FromBody] NovoUsuarioForm usuarioForm) {
             return Ok(_usuarioService.cadastrarNovoUsuario(usuarioForm));
         }
-
+        
     }
 }

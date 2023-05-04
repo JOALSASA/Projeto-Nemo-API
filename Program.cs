@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Projeto_Nemo.Controllers.Middleware;
 using Projeto_Nemo.Data;
 using Projeto_Nemo.Repositories;
 using Projeto_Nemo.Repositories.Interfaces;
@@ -25,11 +26,11 @@ namespace Projeto_Nemo
                 {
                     Version = "v1",
                     Title = "Nemo API",
-                    Description = "Uma API Web em ASP.NET para gerenciar aqu·rios",
+                    Description = "Uma API Web em ASP.NET para gerenciar aqu√°rios",
                 });
             });
 
-            builder.Services.AddDbContext<NemoDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase")));
+            builder.Services.AddDbContext<NemoDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase")));
 
             // Repositories
             builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
@@ -47,6 +48,8 @@ namespace Projeto_Nemo
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
 
             app.UseHttpsRedirection();
             app.UseAuthorization();
