@@ -15,22 +15,17 @@ namespace Projeto_Nemo.Services
             _usuarioRepository = usuarioRepository;
         }
 
-        public Usuario Inserir(Usuario usuario)
-        {
-            throw new NotImplementedException();
-        }
-        
-        public UsuarioDto cadastrarNovoUsuario(NovoUsuarioForm novoUsuario)
+        public UsuarioDto Inserir(NovoUsuarioForm novoUsuario)
         {
             Usuario usuario = new Usuario
             {
                 NomeUsuario = novoUsuario.NomeUsuario,
-                senha = novoUsuario.senha
+                Senha = novoUsuario.senha
             };
 
             return new UsuarioDto(_usuarioRepository.Inserir(usuario));
         }
-
+        
         public Usuario Alterar(Usuario usuario)
         {
             throw new NotImplementedException();

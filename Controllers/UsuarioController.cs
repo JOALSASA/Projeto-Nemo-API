@@ -15,10 +15,6 @@ namespace Projeto_Nemo.Controllers
         {
             _usuarioService = usuarioService;
         }
-        [HttpPost]
-        public void CadastrarUsuario(NovoUsuarioForm usuarioForm) {
-
-        }
         
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioDto))]
@@ -38,9 +34,11 @@ namespace Projeto_Nemo.Controllers
         }
         
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioDto))]
-        public ActionResult<UsuarioDto> cadastrarUsuario([FromBody] NovoUsuarioForm usuarioForm) {
-            return Ok(_usuarioService.cadastrarNovoUsuario(usuarioForm));
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(UsuarioDto))]
+        public ActionResult<UsuarioDto> CadastrarUsuario([FromBody] NovoUsuarioForm usuarioForm)
+        {
+            UsuarioDto usuarioDto = _usuarioService.Inserir(usuarioForm);
+            return CreatedAtAction(nameof(BuscarPorId),new {id = usuarioDto.Id}, usuarioDto);
         }
         
     }
