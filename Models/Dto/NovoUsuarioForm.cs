@@ -3,9 +3,12 @@ namespace Projeto_Nemo.Models.Dto
 {
     public class NovoUsuarioForm
     {
-        [Required(ErrorMessage = "Nome de usu�rio � requerido.", AllowEmptyStrings = false)]
-        public String NomeUsuario { get; set; } = null!;
+        [Required(ErrorMessage = "Nome de usuário é requerido.", AllowEmptyStrings = false)]
+        public String NomeUsuario { get;  } = null!;
+        [EmailAddress]
+        [Required(ErrorMessage = "Email é requerido.", AllowEmptyStrings = false)]
+        public String Email { get; } = null!;
         [Required(ErrorMessage = "Senha requerida", AllowEmptyStrings = false)]
-        public String senha { get; set; } = null!;
+        public String Senha { get; } = null!;
     }
 }

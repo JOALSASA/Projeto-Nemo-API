@@ -4,11 +4,13 @@
     {
         public int Id { get; set; }
         public String NomeUsuario { get; set; } = null!;
+        public String Email { get; set; } = null!;
 
         public UsuarioDto(Usuario usuario)
         {
             Id = usuario.Id;
             NomeUsuario = usuario.NomeUsuario;
+            Email = usuario.Email;
         }
 
     }

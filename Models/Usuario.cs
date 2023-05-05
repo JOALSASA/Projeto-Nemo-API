@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public String NomeUsuario { get; set; } = null!;
+        public String Email { get; set; } = null!;
         public String Senha { get; set; } = null!;
 
         public List<Aquario> ListaAquarios { get; set; } = new();

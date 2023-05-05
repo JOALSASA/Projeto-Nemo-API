@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projeto_Nemo.Models;
+using Projeto_Nemo.Models.Enums;
 
 namespace Projeto_Nemo.Data
 {
@@ -41,7 +43,13 @@ namespace Projeto_Nemo.Data
                 .WithOne(h => h.Usuario)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Usuario>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<Usuario>().HasIndex(u => u.NomeUsuario).IsUnique();
+            
+            modelBuilder
+                .Entity<Parametro>()
+                .Property(p => p.Tipo)
+                .HasConversion(new EnumToStringConverter<TipoParametro>());
 
             // Configurações de propriedades
             modelBuilder.Entity<Usuario>().Property(u => u.NomeUsuario).HasMaxLength(100).IsRequired();

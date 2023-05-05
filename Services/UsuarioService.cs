@@ -20,7 +20,8 @@ namespace Projeto_Nemo.Services
             Usuario usuario = new Usuario
             {
                 NomeUsuario = novoUsuario.NomeUsuario,
-                Senha = novoUsuario.senha
+                Senha = novoUsuario.Senha,
+                Email = novoUsuario.Email
             };
 
             return new UsuarioDto(_usuarioRepository.Inserir(usuario));
