@@ -15,7 +15,9 @@ namespace Projeto_Nemo.Repositories
 
         public Usuario Alterar(Usuario usuario)
         {
-            throw new NotImplementedException();
+            _dbContext.Update(usuario);
+            _dbContext.SaveChanges();
+            return usuario;
         }
 
         public Usuario Excluir(Usuario usuario)

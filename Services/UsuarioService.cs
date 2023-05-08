@@ -27,9 +27,18 @@ namespace Projeto_Nemo.Services
             return new UsuarioDto(_usuarioRepository.Inserir(usuario));
         }
         
-        public Usuario Alterar(Usuario usuario)
+        public UsuarioDto Alterar(int id, EditarUsuarioForm editarUsuario)
         {
-            throw new NotImplementedException();
+            var usuarioExistente = _usuarioRepository.FindUsuarioById(id);
+
+            if (usuarioExistente == null)
+            {
+                throw new NotFoundException("Usuário não encontrado.");
+            }
+
+            usuarioExistente.NomeUsuario = editarUsuario.NomeUsuario;
+
+            return new UsuarioDto(_usuarioRepository.Alterar(usuarioExistente));
         }
 
         public Usuario Excluir(Usuario usuario)
