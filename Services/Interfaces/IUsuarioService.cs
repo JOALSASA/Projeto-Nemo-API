@@ -10,5 +10,6 @@ namespace Projeto_Nemo.Services.Interfaces
         Usuario Excluir(Usuario usuario);
         UsuarioDto FindUsuarioById(int id);
         List<UsuarioDto> FindUsuarioByNome(string nome);
+        string Autenticar(LoginForm loginForm);
     }
 }

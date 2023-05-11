@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Projeto_Nemo.Models.Dto;
 using Projeto_Nemo.Services.Interfaces;
@@ -41,5 +42,12 @@ namespace Projeto_Nemo.Controllers
             return CreatedAtAction(nameof(BuscarPorId),new {id = usuarioDto.Id}, usuarioDto);
         }
         
+        [HttpPost]
+        [Route("autenticar")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioDto))]
+        public ActionResult<UsuarioDto> Autenticar([FromBody] LoginForm loginForm)
+        {
+            return Ok(_usuarioService.Autenticar(loginForm));
+        }
     }
 }
