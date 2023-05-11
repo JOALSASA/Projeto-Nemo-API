@@ -46,6 +46,7 @@ namespace Projeto_Nemo.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public ActionResult<UsuarioDto> EditarUsuario(int id, [FromBody] EditarUsuarioForm editarUsuario)
         {
             UsuarioDto usuarioDto = _usuarioService.Alterar(id, editarUsuario);

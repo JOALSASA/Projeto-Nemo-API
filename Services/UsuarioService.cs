@@ -26,7 +26,7 @@ namespace Projeto_Nemo.Services
 
             return new UsuarioDto(_usuarioRepository.Inserir(usuario));
         }
-        
+
         public UsuarioDto Alterar(int id, EditarUsuarioForm editarUsuario)
         {
             var usuarioExistente = _usuarioRepository.FindUsuarioById(id);
@@ -34,6 +34,14 @@ namespace Projeto_Nemo.Services
             if (usuarioExistente == null)
             {
                 throw new NotFoundException("Usuário não encontrado.");
+            }
+
+            List<Usuario> listaUsuarios = _usuarioRepository.FindUsuarioByNome(editarUsuario.NomeUsuario);
+
+            // Verifica se o novo nome de usuario já está em uso
+            if (listaUsuarios.Exists(usuarios => usuarios.NomeUsuario.Equals(editarUsuario.NomeUsuario)))
+            {
+                throw new ConflictException("Este nome de usuário já está em uso.");
             }
 
             usuarioExistente.NomeUsuario = editarUsuario.NomeUsuario;
