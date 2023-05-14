@@ -17,7 +17,8 @@ namespace Projeto_Nemo.Controllers
             _usuarioService = usuarioService;
         }
         
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<UsuarioDto> BuscarPorId(int id)
@@ -27,6 +28,7 @@ namespace Projeto_Nemo.Controllers
         }
         
         [HttpGet]
+        [Authorize]
         [Route("consultar")]
         public IActionResult  FindUsuarioNome(string nome)
         {

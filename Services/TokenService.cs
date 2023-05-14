@@ -21,6 +21,7 @@ public class TokenService : ITokenService
         var manipuladorToken = new JwtSecurityTokenHandler();
         
         var chave = Encoding.ASCII.GetBytes(_configuration["Jwt:SecretKey"]!);
+        Console.Write(chave);
         var descritorToken = new SecurityTokenDescriptor
         {
             Expires = DateTime.UtcNow.AddHours(8),
