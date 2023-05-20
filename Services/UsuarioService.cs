@@ -40,7 +40,7 @@ namespace Projeto_Nemo.Services
             throw new NotImplementedException();
         }
 
-        public UsuarioDto FindUsuarioById(int id)
+        public UsuarioDto RecuperarPorId(int id)
         {
             var usuario = _usuarioRepository.FindUsuarioById(id);
             if (usuario == null)
@@ -51,7 +51,7 @@ namespace Projeto_Nemo.Services
             return new UsuarioDto(usuario);
         }
 
-        public List<UsuarioDto> FindUsuarioByNome(string nome)
+        public List<UsuarioDto> RecuperarPorNome(string nome)
         {
             List<UsuarioDto> listaUsuarioDtos = new List<UsuarioDto>();
             List<Usuario> listaUsuarios = _usuarioRepository.FindUsuarioByNome(nome);

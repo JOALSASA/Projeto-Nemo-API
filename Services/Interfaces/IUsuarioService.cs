@@ -8,8 +8,8 @@ namespace Projeto_Nemo.Services.Interfaces
         UsuarioDto Inserir(NovoUsuarioForm novoUsuario);
         Usuario Alterar(Usuario usuario);
         Usuario Excluir(Usuario usuario);
-        UsuarioDto FindUsuarioById(int id);
-        List<UsuarioDto> FindUsuarioByNome(string nome);
+        UsuarioDto RecuperarPorId(int id);
+        List<UsuarioDto> RecuperarPorNome(string nome);
         string Autenticar(LoginForm loginForm);
     }
 }

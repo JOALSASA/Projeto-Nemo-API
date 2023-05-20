@@ -91,6 +91,7 @@ namespace Projeto_Nemo
             // Repositories
             builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             builder.Services.AddScoped<IAquarioRepository, AquarioRepository>();
+            builder.Services.AddScoped<IPerfilRepository, PerfilRepository>();
 
             // Services
             builder.Services.AddScoped<ITokenService, TokenService>();

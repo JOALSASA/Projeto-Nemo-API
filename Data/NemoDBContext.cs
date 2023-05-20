@@ -25,7 +25,6 @@ namespace Projeto_Nemo.Data
                .WithMany(ap => ap.AquarioParametros)
                .HasForeignKey(ap => ap.ParametrosId);
 
-
             modelBuilder.Entity<UsuarioAquario>()
                .HasOne(u => u.Usuario)
                .WithMany(ua => ua.UsuarioAquarios)
@@ -55,10 +54,11 @@ namespace Projeto_Nemo.Data
             modelBuilder.Entity<Usuario>().Property(u => u.NomeUsuario).HasMaxLength(100).IsRequired();
         }
 
-        public DbSet<Aquario> Aquarios { get; set; }
-        public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Historico> Historicos { get; set; }
-        public DbSet<Parametro> Parametros { get; set; }
-        public DbSet<AquarioParametro> AquarioParametros { get; set; }
+        public DbSet<Aquario> Aquarios { get; set; } = default!;
+        public DbSet<Usuario> Usuarios { get; set; } = default!;
+        public DbSet<Historico> Historicos { get; set; } = default!;
+        public DbSet<Parametro> Parametros { get; set; } = default!;
+        public DbSet<Perfil> Perfis { get; set; } = default!;
+        public DbSet<AquarioParametro> AquarioParametros { get; set; } = default!;
     }
 }

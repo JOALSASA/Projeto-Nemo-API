@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projeto_Nemo.Data;
 
@@ -11,9 +12,11 @@ using Projeto_Nemo.Data;
 namespace Projeto_Nemo.Migrations
 {
     [DbContext(typeof(NemoDbContext))]
-    partial class NemoDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230514020723_AdicaoPerfis")]
+    partial class AdicaoPerfis
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace Projeto_Nemo.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("PerfilUsuario", b =>
-                {
-                    b.Property<int>("PerfisId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsuariosId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PerfisId", "UsuariosId");
-
-                    b.HasIndex("UsuariosId");
-
-                    b.ToTable("PerfilUsuario");
-                });
 
             modelBuilder.Entity("Projeto_Nemo.Models.Aquario", b =>
                 {
@@ -163,6 +151,29 @@ namespace Projeto_Nemo.Migrations
                     b.ToTable("Perfis");
                 });
 
+            modelBuilder.Entity("Projeto_Nemo.Models.PerfilUsuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PerfisId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsuariosId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PerfisId");
+
+                    b.HasIndex("UsuariosId");
+
+                    b.ToTable("PerfilUsuarios");
+                });
+
             modelBuilder.Entity("Projeto_Nemo.Models.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -218,21 +229,6 @@ namespace Projeto_Nemo.Migrations
                     b.ToTable("UsuarioAquario");
                 });
 
-            modelBuilder.Entity("PerfilUsuario", b =>
-                {
-                    b.HasOne("Projeto_Nemo.Models.Perfil", null)
-                        .WithMany()
-                        .HasForeignKey("PerfisId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Projeto_Nemo.Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UsuariosId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Projeto_Nemo.Models.Aquario", b =>
                 {
                     b.HasOne("Projeto_Nemo.Models.Usuario", "Usuario")
@@ -282,6 +278,25 @@ namespace Projeto_Nemo.Migrations
                     b.Navigation("Usuario");
                 });
 
+            modelBuilder.Entity("Projeto_Nemo.Models.PerfilUsuario", b =>
+                {
+                    b.HasOne("Projeto_Nemo.Models.Perfil", "Perfil")
+                        .WithMany("UsuarioPerfis")
+                        .HasForeignKey("PerfisId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Projeto_Nemo.Models.Usuario", "Usuario")
+                        .WithMany("PerfilUsuarios")
+                        .HasForeignKey("UsuariosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Perfil");
+
+                    b.Navigation("Usuario");
+                });
+
             modelBuilder.Entity("Projeto_Nemo.Models.UsuarioAquario", b =>
                 {
                     b.HasOne("Projeto_Nemo.Models.Usuario", "Usuario")
@@ -318,11 +333,18 @@ namespace Projeto_Nemo.Migrations
                     b.Navigation("AquarioParametros");
                 });
 
+            modelBuilder.Entity("Projeto_Nemo.Models.Perfil", b =>
+                {
+                    b.Navigation("UsuarioPerfis");
+                });
+
             modelBuilder.Entity("Projeto_Nemo.Models.Usuario", b =>
                 {
                     b.Navigation("ListaAquarios");
 
                     b.Navigation("ListaHistoricos");
+
+                    b.Navigation("PerfilUsuarios");
 
                     b.Navigation("UsuarioAquarios");
                 });
