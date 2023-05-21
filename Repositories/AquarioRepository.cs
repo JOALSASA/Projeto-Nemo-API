@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Projeto_Nemo.Data;
+﻿using Projeto_Nemo.Data;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Repositories.Interfaces;
 
@@ -7,9 +6,9 @@ namespace Projeto_Nemo.Repositories
 {
     public class AquarioRepository : IAquarioRepository
     {
-        private readonly NemoDBContext _dbContext;
+        private readonly NemoDbContext _dbContext;
 
-        public AquarioRepository(NemoDBContext dbContext)
+        public AquarioRepository(NemoDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -24,12 +23,12 @@ namespace Projeto_Nemo.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Aquario> FindAquarioById(int id)
+        public Task<Aquario> RecuperarPorId(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Aquario>> FindAquarioByUsuarioId(int id)
+        public Task<List<Aquario>> RecuperarPorUsuarioId(int id)
         {
             throw new NotImplementedException();
         }

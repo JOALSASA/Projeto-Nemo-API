@@ -3,7 +3,7 @@
     public class Aquario
     {
         public int Id { get; set; }
-        public String NomeAquario { get; set; } = null!;
+        public String Nome { get; set; } = null!;
         public int Largura { get; set; }
         public int Altura { get; set; }
         public int Comprimento { get; set; }

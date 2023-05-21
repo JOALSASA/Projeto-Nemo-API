@@ -5,10 +5,11 @@ namespace Projeto_Nemo.Services.Interfaces
 {
     public interface IUsuarioService
     {
-        Usuario Inserir(Usuario usuario);
+        UsuarioDto Inserir(NovoUsuarioForm novoUsuario);
         Usuario Alterar(Usuario usuario);
-        bool Excluir(NovoUsuarioForm usuario);
-        Usuario FindUsuarioById(int id);
-        List<UsuarioDto> FindUsuarioByNome(string nome);
+        Usuario Excluir(Usuario usuario);
+        UsuarioDto RecuperarPorId(int id);
+        List<UsuarioDto> RecuperarPorNome(string nome);
+        string Autenticar(LoginForm loginForm);
     }
 }

@@ -12,8 +12,8 @@ using Projeto_Nemo.Data;
 namespace Projeto_Nemo.Migrations
 {
     [DbContext(typeof(NemoDbContext))]
-    [Migration("20230428013245_initialDB")]
-    partial class initialDB
+    [Migration("20230505014015_UsuarioParametro")]
+    partial class UsuarioParametro
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ namespace Projeto_Nemo.Migrations
                     b.Property<int>("Largura")
                         .HasColumnType("int");
 
-                    b.Property<string>("NomeAquario")
+                    b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -125,6 +125,10 @@ namespace Projeto_Nemo.Migrations
                     b.Property<int>("Min")
                         .HasColumnType("int");
 
+                    b.Property<string>("Tipo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Parametros");
@@ -138,15 +142,26 @@ namespace Projeto_Nemo.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("NomeUsuario")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("senha")
+                    b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("NomeUsuario")
+                        .IsUnique();
 
                     b.ToTable("Usuarios");
                 });

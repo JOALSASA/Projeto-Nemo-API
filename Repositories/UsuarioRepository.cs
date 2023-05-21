@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Projeto_Nemo.Data;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Repositories.Interfaces;
@@ -11,17 +6,18 @@ namespace Projeto_Nemo.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        private readonly NemoDBContext _dbContext;
+        private readonly NemoDbContext _dbContext;
 
-        public UsuarioRepository(NemoDBContext dbContext)
+        public UsuarioRepository(NemoDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public Task<Usuario> Alterar(Usuario usuario)
+        public Usuario Alterar(Usuario usuario)
         {
             throw new NotImplementedException();
         }
+
 
         public bool Excluir(Usuario usuario)
         {
@@ -30,19 +26,26 @@ namespace Projeto_Nemo.Repositories
             return true;
         }
 
-        public Task<Usuario> FindUsuarioById(int id)
+        public Usuario? FindUsuarioById(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Usuarios.Find(id);
         }
-
+        
         public List<Usuario> FindUsuarioByNome(string nome)
         {
             return _dbContext.Usuarios.Where(u => u.NomeUsuario.Contains(nome)).ToList();
         }
 
-        public Task<Usuario> Inserir(Usuario usuario)
+        public Usuario? RecuperarPorEmail(string email)
         {
-            throw new NotImplementedException();
+            return _dbContext.Usuarios.FirstOrDefault(u => u.Email.Equals(email));
+        }
+
+        public Usuario Inserir(Usuario usuario)
+        {
+            _dbContext.Add(usuario);
+            _dbContext.SaveChanges();
+            return usuario;
         }
     }
 }

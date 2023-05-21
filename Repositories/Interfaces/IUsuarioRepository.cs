@@ -1,17 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Projeto_Nemo.Models;
 
 namespace Projeto_Nemo.Repositories.Interfaces
 {
     public interface IUsuarioRepository
     {
-        Task<Usuario> Inserir(Usuario usuario);
-        Task<Usuario> Alterar(Usuario usuario);
+
+        Usuario Inserir(Usuario usuario);
+        Usuario Alterar(Usuario usuario);
         bool Excluir(Usuario usuario);
-        Task<Usuario> FindUsuarioById(int id);
+        Usuario? FindUsuarioById(int id);
         List<Usuario> FindUsuarioByNome(string name);
+        Usuario? RecuperarPorEmail(string email);
     }
 }
