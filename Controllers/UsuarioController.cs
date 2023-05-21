@@ -33,6 +33,15 @@ namespace Projeto_Nemo.Controllers
             List<UsuarioDto> usuarios = _usuarioService.RecuperarPorNome(nome);
             return Ok(usuarios);
         }
+
+        [HttpDelete]
+        [Route("deletar/{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult DeletarUsuario(int id)
+        {
+            return Ok(_usuarioService.Excluir(id));
+        }
         
         [HttpPost]
         [AllowAnonymous]
