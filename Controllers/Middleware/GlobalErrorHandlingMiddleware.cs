@@ -40,6 +40,7 @@ public class GlobalErrorHandlingMiddleware
         }
         catch (Exception _)
         {
+            // Não enviar mensagens de erros internos para o cliente
             mensagem = exception.Message;
             status = HttpStatusCode.InternalServerError;
         }

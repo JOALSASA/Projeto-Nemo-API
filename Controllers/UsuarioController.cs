@@ -22,8 +22,7 @@ namespace Projeto_Nemo.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<UsuarioDto> BuscarPorId(int id)
         {
-            var usuarioDto = _usuarioService.RecuperarPorId(id);
-            return Ok(usuarioDto);
+            return Ok(new UsuarioDto(_usuarioService.RecuperarPorId(id)));
         }
         
         [HttpGet]
