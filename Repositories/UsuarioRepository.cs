@@ -18,11 +18,10 @@ namespace Projeto_Nemo.Repositories
             throw new NotImplementedException();
         }
 
-        public bool Excluir(Usuario usuario)
+        public void Excluir(Usuario usuario)
         {
             _dbContext.Usuarios.Remove(usuario);
             _dbContext.SaveChanges();
-            return true;
         }
 
         public Usuario? FindUsuarioById(int id)

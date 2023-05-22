@@ -34,13 +34,13 @@ namespace Projeto_Nemo.Controllers
             return Ok(usuarios);
         }
 
-        [HttpDelete]
-        [Route("deletar/{id:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpDelete("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeletarUsuario(int id)
         {
-            return Ok(_usuarioService.Excluir(id));
+            _usuarioService.Excluir(id);
+            return NoContent();
         }
         
         [HttpPost]

@@ -7,7 +7,7 @@ namespace Projeto_Nemo.Repositories.Interfaces
 
         Usuario Inserir(Usuario usuario);
         Usuario Alterar(Usuario usuario);
-        bool Excluir(Usuario usuario);
+        void Excluir(Usuario usuario);
         Usuario? FindUsuarioById(int id);
         List<Usuario> FindUsuarioByNome(string name);
         Usuario? RecuperarPorEmail(string email);

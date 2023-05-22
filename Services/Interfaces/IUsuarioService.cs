@@ -7,7 +7,7 @@ namespace Projeto_Nemo.Services.Interfaces
     {
         UsuarioDto Inserir(NovoUsuarioForm novoUsuario);
         Usuario Alterar(Usuario usuario);
-        bool Excluir(int id);
+        void Excluir(int id);
         UsuarioDto RecuperarPorId(int id);
         List<UsuarioDto> RecuperarPorNome(string nome);
         string Autenticar(LoginForm loginForm);
