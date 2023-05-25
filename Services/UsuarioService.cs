@@ -36,10 +36,9 @@ namespace Projeto_Nemo.Services
                 throw new NotFoundException("Usuário não encontrado.");
             }
 
-            List<Usuario> listaUsuarios = _usuarioRepository.FindUsuarioByNome(editarUsuario.NomeUsuario);
 
             // Verifica se o novo nome de usuario já está em uso
-            if (listaUsuarios.Exists(usuarios => usuarios.NomeUsuario.Equals(editarUsuario.NomeUsuario)))
+            if (_usuarioRepository.FindUsuarioByName(editarUsuario.NomeUsuario) != null)
             {
                 throw new ConflictException("Este nome de usuário já está em uso.");
             }
