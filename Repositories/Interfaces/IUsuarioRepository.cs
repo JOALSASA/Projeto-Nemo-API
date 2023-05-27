@@ -9,6 +9,7 @@ namespace Projeto_Nemo.Repositories.Interfaces
         Usuario Excluir(Usuario usuario);
         Usuario? FindUsuarioById(int id);
         List<Usuario> FindUsuarioByNome(string name);
+        Usuario? RecuperarPorEmail(string email);
         Usuario? FindUsuarioByName(string name);
     }
 }

@@ -40,6 +40,11 @@ namespace Projeto_Nemo.Repositories
             return _dbContext.Usuarios.Where(u => u.NomeUsuario.Contains(nome)).ToList();
         }
 
+        public Usuario? RecuperarPorEmail(string email)
+        {
+            return _dbContext.Usuarios.FirstOrDefault(u => u.Email.Equals(email));
+        }
+
         public Usuario Inserir(Usuario usuario)
         {
             _dbContext.Add(usuario);

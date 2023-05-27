@@ -23,12 +23,12 @@ namespace Projeto_Nemo.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Aquario> FindAquarioById(int id)
+        public Task<Aquario> RecuperarPorId(int id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<List<Aquario>> FindAquarioByUsuarioId(int id)
+        public Task<List<Aquario>> RecuperarPorUsuarioId(int id)
         {
             throw new NotImplementedException();
         }

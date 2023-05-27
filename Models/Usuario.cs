@@ -10,5 +10,6 @@
         public List<Aquario> ListaAquarios { get; set; } = new();
         public List<Historico> ListaHistoricos { get; set; } = new();
         public List<UsuarioAquario> UsuarioAquarios { get; set; } = new();
+        public List<Perfil> Perfis { get; set; } = new();
     }
 }

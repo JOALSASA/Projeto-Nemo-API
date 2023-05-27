@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Projeto_Nemo.Exceptions;
 using Projeto_Nemo.Models;
@@ -17,30 +18,39 @@ namespace Projeto_Nemo.Controllers
         {
             _usuarioService = usuarioService;
         }
-
-        [HttpGet("{id}")]
+        
+        [HttpGet("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<UsuarioDto> BuscarPorId(int id)
         {
-            var usuarioDto = _usuarioService.FindUsuarioById(id);
-            return Ok(usuarioDto);
+            return Ok(new UsuarioDto(_usuarioService.RecuperarPorId(id)));
         }
 
         [HttpGet]
         [Route("consultar")]
         public IActionResult FindUsuarioNome(string nome)
         {
-            List<UsuarioDto> usuarios = _usuarioService.FindUsuarioByNome(nome);
+            List<UsuarioDto> usuarios = _usuarioService.RecuperarPorNome(nome);
             return Ok(usuarios);
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(UsuarioDto))]
         public ActionResult<UsuarioDto> CadastrarUsuario([FromBody] NovoUsuarioForm usuarioForm)
         {
             UsuarioDto usuarioDto = _usuarioService.Inserir(usuarioForm);
             return CreatedAtAction(nameof(BuscarPorId), new { id = usuarioDto.Id }, usuarioDto);
+        }
+        
+        [HttpPost]
+        [Route("autenticar")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioDto))]
+        public ActionResult<UsuarioDto> Autenticar([FromBody] LoginForm loginForm)
+        {
+            return Ok(_usuarioService.Autenticar(loginForm));
         }
 
         [HttpPut("{id}")]

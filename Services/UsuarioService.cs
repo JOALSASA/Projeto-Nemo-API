@@ -1,4 +1,5 @@
-﻿using Projeto_Nemo.Exceptions;
+﻿using System.Net;
+using Projeto_Nemo.Exceptions;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Dto;
 using Projeto_Nemo.Repositories.Interfaces;
@@ -9,10 +10,15 @@ namespace Projeto_Nemo.Services
     public class UsuarioService : IUsuarioService
     {
         private readonly IUsuarioRepository _usuarioRepository;
+        private readonly ITokenService _tokenService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UsuarioService(IUsuarioRepository usuarioRepository)
+        public UsuarioService(IUsuarioRepository usuarioRepository, ITokenService tokenService,
+            IHttpContextAccessor httpContextAccessor)
         {
             _usuarioRepository = usuarioRepository;
+            _tokenService = tokenService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public UsuarioDto Inserir(NovoUsuarioForm novoUsuario)
@@ -20,7 +26,7 @@ namespace Projeto_Nemo.Services
             Usuario usuario = new Usuario
             {
                 NomeUsuario = novoUsuario.NomeUsuario,
-                Senha = novoUsuario.Senha,
+                Senha = BCrypt.Net.BCrypt.HashPassword(novoUsuario.Senha),
                 Email = novoUsuario.Email
             };
 
@@ -53,7 +59,7 @@ namespace Projeto_Nemo.Services
             throw new NotImplementedException();
         }
 
-        public UsuarioDto FindUsuarioById(int id)
+        public Usuario RecuperarPorId(int id)
         {
             var usuario = _usuarioRepository.FindUsuarioById(id);
             if (usuario == null)
@@ -61,10 +67,10 @@ namespace Projeto_Nemo.Services
                 throw new NotFoundException("Usuário não encontrado.");
             }
 
-            return new UsuarioDto(usuario);
+            return usuario;
         }
 
-        public List<UsuarioDto> FindUsuarioByNome(string nome)
+        public List<UsuarioDto> RecuperarPorNome(string nome)
         {
             List<UsuarioDto> listaUsuarioDtos = new List<UsuarioDto>();
             List<Usuario> listaUsuarios = _usuarioRepository.FindUsuarioByNome(nome);
@@ -74,6 +80,16 @@ namespace Projeto_Nemo.Services
             }
 
             return listaUsuarioDtos;
+        }
+
+        public string Autenticar(LoginForm loginForm)
+        {
+            Usuario? usuario = _usuarioRepository.RecuperarPorEmail(loginForm.Email);
+
+            if (usuario == null || !BCrypt.Net.BCrypt.Verify(loginForm.Senha, usuario.Senha))
+                throw new AppException("Usuário ou senha incorretos.", HttpStatusCode.Unauthorized);
+
+            return _tokenService.GerarToken(usuario);
         }
     }
 }
