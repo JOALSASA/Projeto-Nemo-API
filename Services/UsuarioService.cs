@@ -33,9 +33,25 @@ namespace Projeto_Nemo.Services
             return new UsuarioDto(_usuarioRepository.Inserir(usuario));
         }
 
-        public Usuario Alterar(Usuario usuario)
+        public UsuarioDto Alterar(int id, EditarUsuarioForm editarUsuario)
         {
-            throw new NotImplementedException();
+            var usuarioExistente = _usuarioRepository.FindUsuarioById(id);
+
+            if (usuarioExistente == null)
+            {
+                throw new NotFoundException("Usuário não encontrado.");
+            }
+
+
+            // Verifica se o novo nome de usuario já está em uso
+            if (_usuarioRepository.FindUsuarioByName(editarUsuario.NomeUsuario) != null)
+            {
+                throw new ConflictException("Este nome de usuário já está em uso.");
+            }
+
+            usuarioExistente.NomeUsuario = editarUsuario.NomeUsuario;
+
+            return new UsuarioDto(_usuarioRepository.Alterar(usuarioExistente));
         }
 
         public Usuario Excluir(Usuario usuario)
