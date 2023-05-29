@@ -35,6 +35,15 @@ namespace Projeto_Nemo.Controllers
             return Ok(usuarios);
         }
 
+        [HttpDelete("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult DeletarUsuario(int id)
+        {
+            _usuarioService.Excluir(id);
+            return NoContent();
+        }
+        
         [HttpPost]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(UsuarioDto))]

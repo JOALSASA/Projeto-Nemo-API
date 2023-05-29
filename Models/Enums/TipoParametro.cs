@@ -2,7 +2,12 @@
 {
     public enum TipoParametro
     {
-        PH = 0,
-        TEMPERATURA = 1,
+        Ph,
+        Temperatura,
+        Oxigenio,
+        Iluminacao,
+        BombaDagua,
+        FluxoAgua,
+        Nitrato
     }
 }

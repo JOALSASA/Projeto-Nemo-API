@@ -54,9 +54,14 @@ namespace Projeto_Nemo.Services
             return new UsuarioDto(_usuarioRepository.Alterar(usuarioExistente));
         }
 
-        public Usuario Excluir(Usuario usuario)
+        public void Excluir(int id)
         {
-            throw new NotImplementedException();
+            var usuario = _usuarioRepository.FindUsuarioById(id);
+            if (usuario == null)
+            {
+                throw new NotFoundException("Usuário não encontrado.");
+            }
+            _usuarioRepository.Excluir(usuario);
         }
 
         public Usuario RecuperarPorId(int id)

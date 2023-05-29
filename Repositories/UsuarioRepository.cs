@@ -20,9 +20,10 @@ namespace Projeto_Nemo.Repositories
             return usuario;
         }
 
-        public Usuario Excluir(Usuario usuario)
+        public void Excluir(Usuario usuario)
         {
-            throw new NotImplementedException();
+            _dbContext.Usuarios.Remove(usuario);
+            _dbContext.SaveChanges();
         }
 
         public Usuario? FindUsuarioById(int id)
