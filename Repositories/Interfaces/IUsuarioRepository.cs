@@ -11,5 +11,6 @@ namespace Projeto_Nemo.Repositories.Interfaces
         Usuario? FindUsuarioById(int id);
         List<Usuario> FindUsuarioByNome(string name);
         Usuario? RecuperarPorEmail(string email);
+        Usuario? FindUsuarioByName(string name);
     }
 }

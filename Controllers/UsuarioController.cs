@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Projeto_Nemo.Exceptions;
+using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Dto;
 using Projeto_Nemo.Services.Interfaces;
 
@@ -22,13 +24,12 @@ namespace Projeto_Nemo.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<UsuarioDto> BuscarPorId(int id)
         {
-            var usuarioDto = _usuarioService.RecuperarPorId(id);
-            return Ok(usuarioDto);
+            return Ok(new UsuarioDto(_usuarioService.RecuperarPorId(id)));
         }
-        
+
         [HttpGet]
         [Route("consultar")]
-        public IActionResult  FindUsuarioNome(string nome)
+        public IActionResult FindUsuarioNome(string nome)
         {
             List<UsuarioDto> usuarios = _usuarioService.RecuperarPorNome(nome);
             return Ok(usuarios);
@@ -49,7 +50,7 @@ namespace Projeto_Nemo.Controllers
         public ActionResult<UsuarioDto> CadastrarUsuario([FromBody] NovoUsuarioForm usuarioForm)
         {
             UsuarioDto usuarioDto = _usuarioService.Inserir(usuarioForm);
-            return CreatedAtAction(nameof(BuscarPorId),new {id = usuarioDto.Id}, usuarioDto);
+            return CreatedAtAction(nameof(BuscarPorId), new { id = usuarioDto.Id }, usuarioDto);
         }
         
         [HttpPost]
@@ -59,6 +60,16 @@ namespace Projeto_Nemo.Controllers
         public ActionResult<UsuarioDto> Autenticar([FromBody] LoginForm loginForm)
         {
             return Ok(_usuarioService.Autenticar(loginForm));
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        public ActionResult<UsuarioDto> EditarUsuario(int id, [FromBody] EditarUsuarioForm editarUsuario)
+        {
+            UsuarioDto usuarioDto = _usuarioService.Alterar(id, editarUsuario);
+            return Ok(usuarioDto);
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Projeto_Nemo
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddHttpContextAccessor();
             // Add services to the container.
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -66,7 +67,6 @@ namespace Projeto_Nemo
 
             // Autenticação com Token JWT
             var chave = Encoding.ASCII.GetBytes(configuration["Jwt:SecretKey"]!);
-            Console.WriteLine(chave);
             builder.Services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -85,6 +85,24 @@ namespace Projeto_Nemo
                     ValidAudience = configuration["Jwt:Audience"],
                     IssuerSigningKey =
                         new SymmetricSecurityKey(chave),
+                };
+                
+                x.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = context =>
+                    {
+                        var usuarioService = context.HttpContext.RequestServices.GetRequiredService<IUsuarioService>();
+                        var claims = context.Principal!.Claims;
+                        var claimId = claims.FirstOrDefault(c => c.Type == "id");
+
+                        // Obter as informações do usuário do serviço de usuário
+                        var user = usuarioService.RecuperarPorId(int.Parse(claimId?.Value ?? throw new InvalidOperationException()));
+
+                        // Configurar o usuário no HttpContext
+                        context.HttpContext.Items["User"] = user;
+
+                        return Task.CompletedTask;
+                    }
                 };
             });
 
@@ -109,7 +127,13 @@ namespace Projeto_Nemo
 
             app.UseMiddleware(typeof(GlobalErrorHandlingMiddleware));
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
+            app.UseCors(policy =>
+            {
+                policy.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+            });
             app.UseAuthentication();
             app.UseAuthorization();
             app.MapControllers();

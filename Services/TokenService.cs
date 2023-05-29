@@ -33,6 +33,7 @@ public class TokenService : ITokenService
             Subject = new ClaimsIdentity(new[]
             {
                 new Claim("id", usuario.Id.ToString()),
+                new Claim("nome", usuario.NomeUsuario),
                 new Claim(ClaimTypes.Email, usuario.Email),
                 new Claim(ClaimTypes.Role, string.Join(",", listaPerfis))
             })
