@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Projeto_Nemo.Exceptions;
-using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Dto;
 using Projeto_Nemo.Services.Interfaces;
 
@@ -11,14 +9,13 @@ namespace Projeto_Nemo.Controllers
     [Route("api/[controller]")]
     public class UsuarioController : ControllerBase
     {
-
         private readonly IUsuarioService _usuarioService;
 
         public UsuarioController(IUsuarioService usuarioService)
         {
             _usuarioService = usuarioService;
         }
-        
+
         [HttpGet("{id:int}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -31,7 +28,9 @@ namespace Projeto_Nemo.Controllers
         [Route("consultar")]
         public IActionResult FindUsuarioNome(string nome)
         {
-            List<UsuarioDto> usuarios = _usuarioService.RecuperarPorNome(nome);
+            List<UsuarioDto> usuarios = _usuarioService.RecuperarPorNome(nome)
+                .Select(usu => new UsuarioDto(usu))
+                .ToList();
             return Ok(usuarios);
         }
 
@@ -43,16 +42,16 @@ namespace Projeto_Nemo.Controllers
             _usuarioService.Excluir(id);
             return NoContent();
         }
-        
+
         [HttpPost]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(UsuarioDto))]
         public ActionResult<UsuarioDto> CadastrarUsuario([FromBody] NovoUsuarioForm usuarioForm)
         {
-            UsuarioDto usuarioDto = _usuarioService.Inserir(usuarioForm);
+            UsuarioDto usuarioDto = new UsuarioDto(_usuarioService.Inserir(usuarioForm));
             return CreatedAtAction(nameof(BuscarPorId), new { id = usuarioDto.Id }, usuarioDto);
         }
-        
+
         [HttpPost]
         [Route("autenticar")]
         [AllowAnonymous]
@@ -68,7 +67,7 @@ namespace Projeto_Nemo.Controllers
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         public ActionResult<UsuarioDto> EditarUsuario(int id, [FromBody] EditarUsuarioForm editarUsuario)
         {
-            UsuarioDto usuarioDto = _usuarioService.Alterar(id, editarUsuario);
+            UsuarioDto usuarioDto = new UsuarioDto(_usuarioService.Alterar(id, editarUsuario));
             return Ok(usuarioDto);
         }
     }

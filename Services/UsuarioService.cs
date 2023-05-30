@@ -21,7 +21,7 @@ namespace Projeto_Nemo.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public UsuarioDto Inserir(NovoUsuarioForm novoUsuario)
+        public Usuario Inserir(NovoUsuarioForm novoUsuario)
         {
             Usuario usuario = new Usuario
             {
@@ -30,10 +30,10 @@ namespace Projeto_Nemo.Services
                 Email = novoUsuario.Email
             };
 
-            return new UsuarioDto(_usuarioRepository.Inserir(usuario));
+            return _usuarioRepository.Inserir(usuario);
         }
 
-        public UsuarioDto Alterar(int id, EditarUsuarioForm editarUsuario)
+        public Usuario Alterar(int id, EditarUsuarioForm editarUsuario)
         {
             var usuarioExistente = _usuarioRepository.FindUsuarioById(id);
 
@@ -50,8 +50,7 @@ namespace Projeto_Nemo.Services
             }
 
             usuarioExistente.NomeUsuario = editarUsuario.NomeUsuario;
-
-            return new UsuarioDto(_usuarioRepository.Alterar(usuarioExistente));
+            return _usuarioRepository.Alterar(usuarioExistente);
         }
 
         public void Excluir(int id)
@@ -75,16 +74,9 @@ namespace Projeto_Nemo.Services
             return usuario;
         }
 
-        public List<UsuarioDto> RecuperarPorNome(string nome)
+        public List<Usuario> RecuperarPorNome(string nome)
         {
-            List<UsuarioDto> listaUsuarioDtos = new List<UsuarioDto>();
-            List<Usuario> listaUsuarios = _usuarioRepository.FindUsuarioByNome(nome);
-            foreach (var usuario in listaUsuarios)
-            {
-                listaUsuarioDtos.Add(new UsuarioDto(usuario));
-            }
-
-            return listaUsuarioDtos;
+            return _usuarioRepository.FindUsuarioByNome(nome);
         }
 
         public string Autenticar(LoginForm loginForm)
