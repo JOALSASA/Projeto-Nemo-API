@@ -1,4 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Projeto_Nemo.Models.Dto;
+using Projeto_Nemo.Services.Interfaces;
+using System.Security.Claims;
 
 namespace Projeto_Nemo.Controllers
 {
@@ -6,10 +10,20 @@ namespace Projeto_Nemo.Controllers
     [Route("api/[controller]")]
     public class AquarioController : ControllerBase
     {
-        
-        [HttpGet]
-        public String helloWorld() {
-            return "Hello World";
+        private readonly IAquarioService _aquarioService;
+
+        public AquarioController(IAquarioService aquarioService)
+        {
+            _aquarioService = aquarioService;
+        }
+
+        [HttpGet("{id:int}")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AquarioDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<AquarioDto> BuscarPorId(int id)
+        {
+            return Ok(new AquarioDto(_aquarioService.RecuperarPorId(id)));
         }
     }
 }
