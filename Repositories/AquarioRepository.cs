@@ -34,9 +34,12 @@ namespace Projeto_Nemo.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Aquario> Inserir(Aquario aquario)
+        public Aquario Inserir(Aquario aquario)
         {
-            throw new NotImplementedException();
+            _dbContext.Add(aquario);
+            _dbContext.SaveChanges();
+
+            return aquario;
         }
 
 

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Projeto_Nemo.Models.Dto;
+using Projeto_Nemo.Services;
 using Projeto_Nemo.Services.Interfaces;
 
 namespace Projeto_Nemo.Controllers
