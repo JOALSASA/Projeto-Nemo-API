@@ -1,4 +1,5 @@
-﻿using Projeto_Nemo.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Projeto_Nemo.Data;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Repositories.Interfaces;
 
@@ -23,9 +24,9 @@ namespace Projeto_Nemo.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<Aquario> RecuperarPorId(int id)
+        public Aquario? RecuperarPorId(int id)
         {
-            throw new NotImplementedException();
+            return _dbContext.Aquarios.Where(a => a.Id.Equals(id)).FirstOrDefault();
         }
 
         public Task<List<Aquario>> RecuperarPorUsuarioId(int id)
@@ -37,5 +38,7 @@ namespace Projeto_Nemo.Repositories
         {
             throw new NotImplementedException();
         }
+
+
     }
 }
