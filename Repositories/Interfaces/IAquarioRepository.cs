@@ -8,6 +8,6 @@ namespace Projeto_Nemo.Repositories.Interfaces
         Task<Aquario> Alterar(Aquario aquario);
         Task<Aquario> Excluir(Aquario aquario);
         Task<Aquario> RecuperarPorId(int id);
-        List<Aquario> RecuperarPorUsuarioId(int id);
+        List<Aquario> RecuperarPorUsuarioId(int id, string? nomeAquario);
     }
 }

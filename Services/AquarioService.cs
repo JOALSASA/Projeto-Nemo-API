@@ -16,9 +16,9 @@ namespace Projeto_Nemo.Services
         }
 
 
-        public List<AquarioDto> ListarAquarios(int idUsuario)
+        public List<AquarioDto> ListarAquarios(int idUsuario, string? nomeAquario)
         {
-            List<Aquario> aquariosUsuario = _aquarioRepository.RecuperarPorUsuarioId(idUsuario);
+            List<Aquario> aquariosUsuario = _aquarioRepository.RecuperarPorUsuarioId(idUsuario, nomeAquario);
             if (aquariosUsuario.Count <= 0)
             {
                 throw new NotFoundException("Usuário não possui aquários cadastrados.");

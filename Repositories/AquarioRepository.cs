@@ -28,12 +28,12 @@ namespace Projeto_Nemo.Repositories
             throw new NotImplementedException();
         }
 
-        public List<Aquario> RecuperarPorUsuarioId(int id/*, string nomeAquario*/)
+        public List<Aquario> RecuperarPorUsuarioId(int id, string? nomeAquario)
         {
-            /*if (nomeAquario != null)
+            if (nomeAquario != null)
             {
                 return _dbContext.Aquarios.Where(u => u.Usuario.Id == id & u.Nome.Contains(nomeAquario)).ToList();
-            }*/
+            }
             return _dbContext.Aquarios.Where(u => u.Usuario.Id == id).ToList();
         }
 
