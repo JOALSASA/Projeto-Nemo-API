@@ -28,9 +28,13 @@ namespace Projeto_Nemo.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<Aquario>> RecuperarPorUsuarioId(int id)
+        public List<Aquario> RecuperarPorUsuarioId(int id/*, string nomeAquario*/)
         {
-            throw new NotImplementedException();
+            /*if (nomeAquario != null)
+            {
+                return _dbContext.Aquarios.Where(u => u.Usuario.Id == id & u.Nome.Contains(nomeAquario)).ToList();
+            }*/
+            return _dbContext.Aquarios.Where(u => u.Usuario.Id == id).ToList();
         }
 
         public Task<Aquario> Inserir(Aquario aquario)
