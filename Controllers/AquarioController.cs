@@ -22,21 +22,6 @@ namespace Projeto_Nemo.Controllers
         }
 
         [HttpPost]
-        [Authorize]
-        [AllowAnonymous]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AquarioDto))]
-        public ActionResult<AquarioDto> CadastrarAquario([FromBody] NovoAquarioForm aquarioForm)
-        {
-            Usuario usuarioLogado = _httpContextAccessor.HttpContext.Items["User"] as Usuario;
-
-            AquarioDto aquarioDto = new AquarioDto(_aquarioService.Inserir(aquarioForm, usuarioLogado));
-
-            return Ok(aquarioDto);
-        }
-
-
-        /*
-        [HttpPost]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(AquarioDto))]
         public ActionResult<AquarioDto> CadastrarAquario([FromBody] NovoAquarioForm aquarioForm)
@@ -47,6 +32,5 @@ namespace Projeto_Nemo.Controllers
 
             return CreatedAtAction(nameof(BuscarPorId), new { id = aquarioDto.Id }, aquarioDto);
         }
-        */
     }
 }
