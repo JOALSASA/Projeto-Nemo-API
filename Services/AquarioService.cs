@@ -8,16 +8,13 @@ namespace Projeto_Nemo.Services
     public class AquarioService: IAquarioService
     {
         private readonly IAquarioRepository _aquarioRepository;
-        private readonly IUsuarioRepository _usuarioRepository;
-        public AquarioService(IAquarioRepository aquarioRepository, IUsuarioRepository usuarioRepository)
+        public AquarioService(IAquarioRepository aquarioRepository)
         {
             _aquarioRepository = aquarioRepository;
-            _usuarioRepository = usuarioRepository;
         }
 
-        public Aquario Inserir(NovoAquarioForm novoAquario, int idUsuarioAutenticado)
+        public Aquario Inserir(NovoAquarioForm novoAquario, Usuario usuario)
         {
-            Usuario usuario = _usuarioRepository.FindUsuarioById(idUsuarioAutenticado);
 
             Aquario aquario = new Aquario
             {

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Dto;
+using Projeto_Nemo.Services;
 using Projeto_Nemo.Services.Interfaces;
 using System.Security.Claims;
 
@@ -20,26 +21,32 @@ namespace Projeto_Nemo.Controllers
             _httpContextAccessor = httpContextAccessor;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Authorize]
-        public UsuarioDto GetUsuarioLogado()
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AquarioDto))]
+        public ActionResult<AquarioDto> CadastrarAquario([FromBody] NovoAquarioForm aquarioForm)
         {
-            return new UsuarioDto(_httpContextAccessor.HttpContext.Items["User"] as Usuario);
+            Usuario usuarioLogado = _httpContextAccessor.HttpContext.Items["User"] as Usuario;
+
+            AquarioDto aquarioDto = new AquarioDto(_aquarioService.Inserir(aquarioForm, usuarioLogado));
+
+            return Ok(aquarioDto);
         }
 
-        /*
 
+        /*
         [HttpPost]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(AquarioDto))]
-        public ActionResult<AquarioDto> CadastrarAquario([FromBody] NovoAquarioForm novoAquario)
+        public ActionResult<AquarioDto> CadastrarAquario([FromBody] NovoAquarioForm aquarioForm)
         {
-            int idUsuarioAutenticado = (int)Int64.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            Usuario usuarioLogado = _httpContextAccessor.HttpContext.Items["User"] as Usuario;
 
-            AquarioDto aquarioDto = _aquarioService.Inserir(novoAquario, idUsuarioAutenticado)
+            AquarioDto aquarioDto = new AquarioDto(_aquarioService.Inserir(aquarioForm, usuarioLogado));
+
             return CreatedAtAction(nameof(BuscarPorId), new { id = aquarioDto.Id }, aquarioDto);
         }
-
         */
     }
 }
