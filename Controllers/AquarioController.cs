@@ -2,9 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Dto;
-using Projeto_Nemo.Services;
 using Projeto_Nemo.Services.Interfaces;
-using System.Security.Claims;
 
 namespace Projeto_Nemo.Controllers
 {
@@ -26,11 +24,20 @@ namespace Projeto_Nemo.Controllers
         [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(AquarioDto))]
         public ActionResult<AquarioDto> CadastrarAquario([FromBody] NovoAquarioForm aquarioForm)
         {
-            Usuario usuarioLogado = _httpContextAccessor.HttpContext.Items["User"] as Usuario;
-
+            Usuario? usuarioLogado = _httpContextAccessor.HttpContext.Items["User"] as Usuario;
+            
             AquarioDto aquarioDto = new AquarioDto(_aquarioService.Inserir(aquarioForm, usuarioLogado));
 
             return CreatedAtAction(nameof(BuscarPorId), new { id = aquarioDto.Id }, aquarioDto);
+        }
+
+        [HttpGet("{id:int}")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AquarioDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<AquarioDto> BuscarPorId(int id)
+        {
+            return Ok(new AquarioDto(_aquarioService.RecuperarPorId(id)));
         }
     }
 }

@@ -6,5 +6,6 @@ namespace Projeto_Nemo.Services.Interfaces
     public interface IAquarioService
     {
         Aquario Inserir(NovoAquarioForm novoAquario, Usuario usuario);
+        Aquario RecuperarPorId(int id);
     }
 }
