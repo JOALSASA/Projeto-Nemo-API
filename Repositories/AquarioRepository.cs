@@ -29,9 +29,13 @@ namespace Projeto_Nemo.Repositories
             return _dbContext.Aquarios.Where(a => a.Id.Equals(id)).FirstOrDefault();
         }
 
-        public Task<List<Aquario>> RecuperarPorUsuarioId(int id)
+        public List<Aquario> RecuperarPorUsuarioId(int id, string? nomeAquario)
         {
-            throw new NotImplementedException();
+            if (nomeAquario != null)
+            {
+                return _dbContext.Aquarios.Where(u => u.Usuario.Id == id & u.Nome.Contains(nomeAquario)).ToList();
+            }
+            return _dbContext.Aquarios.Where(u => u.Usuario.Id == id).ToList();
         }
 
         public Aquario Inserir(Aquario aquario)
