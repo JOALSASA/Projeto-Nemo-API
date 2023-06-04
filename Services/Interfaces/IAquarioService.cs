@@ -7,5 +7,6 @@ namespace Projeto_Nemo.Services.Interfaces
     {
         Aquario Inserir(NovoAquarioForm novoAquario, Usuario usuario);
         Aquario RecuperarPorId(int id);
+        Aquario Alterar(int id, EditarAquarioForm editarAquario);
     }
 }
