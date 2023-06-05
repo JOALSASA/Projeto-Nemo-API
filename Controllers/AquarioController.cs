@@ -39,5 +39,16 @@ namespace Projeto_Nemo.Controllers
         {
             return Ok(new AquarioDto(_aquarioService.RecuperarPorId(id)));
         }
+
+        [HttpGet]
+        [Route("listar")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AquarioDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult ListarAquarios([FromQuery] string? nomeAquario)
+        {
+            Usuario? usuarioLogado = _httpContextAccessor.HttpContext.Items["User"] as Usuario;
+            
+            return Ok(_aquarioService.ListarAquarios(usuarioLogado.Id, nomeAquario));
+        }
     }
 }
