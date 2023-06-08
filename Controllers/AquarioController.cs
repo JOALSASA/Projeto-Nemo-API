@@ -40,6 +40,15 @@ namespace Projeto_Nemo.Controllers
             return Ok(new AquarioDto(_aquarioService.RecuperarPorId(id)));
         }
 
+        [HttpPut("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AquarioDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<AquarioDto> EditarAquario(int id, [FromBody] EditarAquarioForm editarAquario)
+        {
+            AquarioDto aquarioDto = new AquarioDto(_aquarioService.Alterar(id, editarAquario));
+            return Ok(aquarioDto);
+        }
+
         [HttpGet]
         [Route("listar")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AquarioDto))]

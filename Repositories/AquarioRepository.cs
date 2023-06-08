@@ -14,9 +14,11 @@ namespace Projeto_Nemo.Repositories
             _dbContext = dbContext;
         }
 
-        public Task<Aquario> Alterar(Aquario aquario)
+        public Aquario Alterar(Aquario aquario)
         {
-            throw new NotImplementedException();
+            _dbContext.Update(aquario);
+            _dbContext.SaveChanges();
+            return aquario;
         }
 
         public Task<Aquario> Excluir(Aquario aquario)

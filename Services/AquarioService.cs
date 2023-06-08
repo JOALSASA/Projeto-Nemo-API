@@ -4,6 +4,7 @@ using Projeto_Nemo.Exceptions;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Repositories.Interfaces;
 using Projeto_Nemo.Services.Interfaces;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Projeto_Nemo.Services
 {
@@ -41,6 +42,36 @@ namespace Projeto_Nemo.Services
             return aquario;
         }
 
+        public Aquario Alterar(int id, EditarAquarioForm editarAquario)
+        {
+
+            Aquario? aquarioExistente = _aquarioRepository.RecuperarPorId(id);
+
+            if (aquarioExistente == null)
+            {
+                throw new NotFoundException("Aquário não encontrado.");
+            }
+
+            if (!editarAquario.Nome.IsNullOrEmpty())
+            {
+                aquarioExistente.Nome = editarAquario.Nome;
+            }
+            if (!editarAquario.Largura.Equals(0))
+            {
+                aquarioExistente.Largura = editarAquario.Largura;
+            }
+            if (!editarAquario.Altura.Equals(0))
+            {
+                aquarioExistente.Altura = editarAquario.Altura;
+            }
+            if (!editarAquario.Comprimento.Equals(0))
+            {
+                aquarioExistente.Comprimento = editarAquario.Comprimento;
+            }
+
+            return _aquarioRepository.Alterar(aquarioExistente);
+        }
+        
         public List<AquarioDto> ListarAquarios(int idUsuario, string? nomeAquario)
         {
             List<Aquario> aquariosUsuario = _aquarioRepository.RecuperarPorUsuarioId(idUsuario, nomeAquario);
@@ -52,6 +83,5 @@ namespace Projeto_Nemo.Services
             List<AquarioDto> aquariosUsuarioDto = aquariosUsuario.Select(aquario => new AquarioDto(aquario)).ToList();
             return aquariosUsuarioDto;
         }
-        
     }
 }
