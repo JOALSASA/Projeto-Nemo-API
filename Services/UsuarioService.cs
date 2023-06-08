@@ -60,6 +60,7 @@ namespace Projeto_Nemo.Services
             {
                 throw new NotFoundException("Usuário não encontrado.");
             }
+
             _usuarioRepository.Excluir(usuario);
         }
 
@@ -87,6 +88,19 @@ namespace Projeto_Nemo.Services
                 throw new AppException("Usuário ou senha incorretos.", HttpStatusCode.Unauthorized);
 
             return _tokenService.GerarToken(usuario);
+        }
+
+        public Usuario RecuperarUsuarioAutenticado()
+        {
+            Usuario? usuarioAutenticado = _httpContextAccessor.HttpContext!.Items["User"] as Usuario;
+
+            if (usuarioAutenticado == null)
+            {
+                throw new AppException("Não foi possível completar a operação por um erro interno no servidor.",
+                    HttpStatusCode.InternalServerError);
+            }
+
+            return usuarioAutenticado;
         }
     }
 }
