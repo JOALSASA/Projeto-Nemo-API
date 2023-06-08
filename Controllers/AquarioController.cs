@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Dto;
-using Projeto_Nemo.Services;
 using Projeto_Nemo.Services.Interfaces;
 
 namespace Projeto_Nemo.Controllers
@@ -48,6 +47,17 @@ namespace Projeto_Nemo.Controllers
         {
             AquarioDto aquarioDto = new AquarioDto(_aquarioService.Alterar(id, editarAquario));
             return Ok(aquarioDto);
+        }
+
+        [HttpGet]
+        [Route("listar")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AquarioDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult ListarAquarios([FromQuery] string? nomeAquario)
+        {
+            Usuario? usuarioLogado = _httpContextAccessor.HttpContext.Items["User"] as Usuario;
+            
+            return Ok(_aquarioService.ListarAquarios(usuarioLogado.Id, nomeAquario));
         }
     }
 }
