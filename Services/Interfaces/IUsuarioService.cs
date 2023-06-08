@@ -11,5 +11,6 @@ namespace Projeto_Nemo.Services.Interfaces
         Usuario RecuperarPorId(int id);
         List<Usuario> RecuperarPorNome(string nome);
         string Autenticar(LoginForm loginForm);
+        Usuario RecuperarUsuarioAutenticado();
     }
 }
