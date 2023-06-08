@@ -72,16 +72,9 @@ namespace Projeto_Nemo.Services
             return _aquarioRepository.Alterar(aquarioExistente);
         }
         
-        public List<AquarioDto> ListarAquarios(int idUsuario, string? nomeAquario)
+        public List<Aquario> ListarAquarios(int idUsuario, string? nomeAquario)
         {
-            List<Aquario> aquariosUsuario = _aquarioRepository.RecuperarPorUsuarioId(idUsuario, nomeAquario);
-            if (aquariosUsuario.Count <= 0)
-            {
-                throw new NotFoundException("Usuário não possui aquários cadastrados.");
-            }
-
-            List<AquarioDto> aquariosUsuarioDto = aquariosUsuario.Select(aquario => new AquarioDto(aquario)).ToList();
-            return aquariosUsuarioDto;
+            return _aquarioRepository.RecuperarPorUsuarioId(idUsuario, nomeAquario);
         }
     }
 }
