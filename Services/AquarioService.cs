@@ -53,5 +53,14 @@ namespace Projeto_Nemo.Services
             return aquariosUsuarioDto;
         }
         
+        public void ExcluirAquario(Usuario usuario ,int idAquario)
+        {
+            var aquario = _aquarioRepository.RecuperarPorId(idAquario);
+            if (aquario == null || aquario.Usuario.Id != usuario.Id)
+            {
+                throw new NotFoundException("Aquário não encontrado.");
+            }
+            _aquarioRepository.Excluir(aquario);
+        }
     }
 }

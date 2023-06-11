@@ -8,5 +8,6 @@ namespace Projeto_Nemo.Services.Interfaces
         Aquario Inserir(NovoAquarioForm novoAquario, Usuario usuario);
         Aquario RecuperarPorId(int id);
         List<AquarioDto> ListarAquarios(int idUsuario, string? nomeAquario);
+        void ExcluirAquario(Usuario usuario, int idAquario);
     }
 }

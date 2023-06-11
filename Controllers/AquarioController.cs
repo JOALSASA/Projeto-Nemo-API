@@ -50,5 +50,15 @@ namespace Projeto_Nemo.Controllers
             
             return Ok(_aquarioService.ListarAquarios(usuarioLogado.Id, nomeAquario));
         }
+        
+        [HttpDelete("{idAquario:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult DeletarAquario(int idAquario)
+        {
+            Usuario? usuarioLogado = _httpContextAccessor.HttpContext.Items["User"] as Usuario;
+            _aquarioService.ExcluirAquario(usuarioLogado, idAquario);
+            return NoContent();
+        }
     }
 }
