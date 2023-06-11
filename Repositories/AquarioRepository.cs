@@ -21,9 +21,10 @@ namespace Projeto_Nemo.Repositories
             return aquario;
         }
 
-        public Task<Aquario> Excluir(Aquario aquario)
+        public void Excluir(Aquario aquario)
         {
-            throw new NotImplementedException();
+            _dbContext.Aquarios.Remove(aquario);
+            _dbContext.SaveChanges();
         }
 
         public Aquario? RecuperarPorId(int id)

@@ -6,7 +6,7 @@ namespace Projeto_Nemo.Repositories.Interfaces
     {
         Aquario Inserir(Aquario aquario);
         Aquario Alterar(Aquario aquario);
-        Task<Aquario> Excluir(Aquario aquario);
+        void Excluir(Aquario aquario);
         Aquario? RecuperarPorId(int id);
         List<Aquario> RecuperarPorUsuarioId(int id, string? nomeAquario);
     }

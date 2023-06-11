@@ -71,10 +71,20 @@ namespace Projeto_Nemo.Services
 
             return _aquarioRepository.Alterar(aquarioExistente);
         }
-        
+
         public List<Aquario> ListarAquarios(int idUsuario, string? nomeAquario)
         {
             return _aquarioRepository.RecuperarPorUsuarioId(idUsuario, nomeAquario);
+        }
+
+        public void ExcluirAquario(Usuario usuario ,int idAquario)
+        {
+            var aquario = _aquarioRepository.RecuperarPorId(idAquario);
+            if (aquario == null || aquario.Usuario.Id != usuario.Id)
+            {
+                throw new NotFoundException("Aquário não encontrado.");
+            }
+            _aquarioRepository.Excluir(aquario);
         }
     }
 }
