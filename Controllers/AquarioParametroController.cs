@@ -1,19 +1,18 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Projeto_Nemo.Models.Dto;
-using Projeto_Nemo.Models.Enums;
-using Projeto_Nemo.Services;
 using Projeto_Nemo.Services.Interfaces;
 
 namespace Projeto_Nemo.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class AquarioParametroController : ControllerBase
     {
         private readonly IAquarioParametroService _aquarioParametroService;
 
-        public AquarioParametroController (IAquarioParametroService aquarioParametroService)
+        public AquarioParametroController(IAquarioParametroService aquarioParametroService)
         {
             _aquarioParametroService = aquarioParametroService;
         }

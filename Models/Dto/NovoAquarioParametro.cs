@@ -6,7 +6,7 @@ namespace Projeto_Nemo.Models.Dto
     public class NovoAquarioParametro
     {
         [Required(ErrorMessage = "Aquário é requerido.", AllowEmptyStrings = false)]
-        public int AquariosId { get; set; }
+        public int IdAquario { get; set; }
         [Required(ErrorMessage = "Parametro é requerido.", AllowEmptyStrings = false)]
         public TipoParametro TipoParametro { get; set; }
         [Required(ErrorMessage = "Valor é requerido.", AllowEmptyStrings = false)]

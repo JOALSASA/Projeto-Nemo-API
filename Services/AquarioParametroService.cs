@@ -13,7 +13,7 @@ namespace Projeto_Nemo.Services
         private readonly IAquarioParametroRepository _aquarioParametroRepository;
         private readonly IAquarioRepository _aquarioRepository;
 
-        public AquarioParametroService (IAquarioParametroRepository aquarioParametroRepository, IAquarioRepository aquarioRepository)
+        public AquarioParametroService(IAquarioParametroRepository aquarioParametroRepository, IAquarioRepository aquarioRepository)
         {
             _aquarioParametroRepository = aquarioParametroRepository;
             _aquarioRepository = aquarioRepository;
@@ -23,9 +23,9 @@ namespace Projeto_Nemo.Services
         {
 
             var parametro = _aquarioParametroRepository.BuscarParametroPorTipo(novoAquarioParametro.TipoParametro);
-            var aquario = _aquarioRepository.RecuperarPorId(novoAquarioParametro.AquariosId);
+            var aquario = _aquarioRepository.RecuperarPorId(novoAquarioParametro.IdAquario);
 
-            if (parametro == null )
+            if (parametro == null)
             {
                 throw new NotFoundException("Parâmetro não encontrado.");
             }
@@ -37,7 +37,7 @@ namespace Projeto_Nemo.Services
 
             AquarioParametro aquarioParametro = new AquarioParametro
             {
-                AquariosId = novoAquarioParametro.AquariosId,
+                AquariosId = novoAquarioParametro.IdAquario,
                 Valor = novoAquarioParametro.Valor,
                 ParametrosId = parametro.Id
             };
