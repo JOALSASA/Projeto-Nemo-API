@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Projeto_Nemo.Models.Dto;
 using Projeto_Nemo.Services.Interfaces;
@@ -8,22 +8,23 @@ namespace Projeto_Nemo.Controllers
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class AquarioParametroController : ControllerBase
+    public class ParametroController : ControllerBase
     {
-        private readonly IAquarioParametroService _aquarioParametroService;
+        private readonly IParametroService _parametroService;
 
-        public AquarioParametroController(IAquarioParametroService aquarioParametroService)
+        public ParametroController(IParametroService parametroService)
         {
-            _aquarioParametroService = aquarioParametroService;
+            _parametroService = parametroService;
         }
 
         [HttpPost]
+        [Route("AquarioParametro")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult AdicionarParametroAoAquario([FromBody] NovoAquarioParametro novoAquarioParametro)
         {
-            _aquarioParametroService.AdicionarParametroAoAquario(novoAquarioParametro);
+            _parametroService.AdicionarParametroAoAquario(novoAquarioParametro);
             return Ok();
         }
     }

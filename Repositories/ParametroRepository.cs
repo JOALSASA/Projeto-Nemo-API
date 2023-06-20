@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Projeto_Nemo.Data;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Enums;
@@ -6,12 +6,12 @@ using Projeto_Nemo.Repositories.Interfaces;
 
 namespace Projeto_Nemo.Repositories
 {
-    public class AquarioParametroRepository : IAquarioParametroRepository
+    public class ParametroRepository : IParametroRepository
     {
 
         private readonly NemoDbContext _dbContext;
 
-        public AquarioParametroRepository(NemoDbContext dbContext)
+        public ParametroRepository(NemoDbContext dbContext)
         {
             _dbContext = dbContext;
         }

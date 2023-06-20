@@ -1,28 +1,26 @@
-﻿using Projeto_Nemo.Exceptions;
+using Projeto_Nemo.Exceptions;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Dto;
-using Projeto_Nemo.Models.Enums;
-using Projeto_Nemo.Repositories;
 using Projeto_Nemo.Repositories.Interfaces;
 using Projeto_Nemo.Services.Interfaces;
 
 namespace Projeto_Nemo.Services
 {
-    public class AquarioParametroService : IAquarioParametroService
+    public class ParametroService : IParametroService
     {
-        private readonly IAquarioParametroRepository _aquarioParametroRepository;
+        private readonly IParametroRepository _parametroRepository;
         private readonly IAquarioRepository _aquarioRepository;
 
-        public AquarioParametroService(IAquarioParametroRepository aquarioParametroRepository, IAquarioRepository aquarioRepository)
+        public ParametroService(IParametroRepository parametroRepository, IAquarioRepository aquarioRepository)
         {
-            _aquarioParametroRepository = aquarioParametroRepository;
+            _parametroRepository = parametroRepository;
             _aquarioRepository = aquarioRepository;
         }
 
         public void AdicionarParametroAoAquario(NovoAquarioParametro novoAquarioParametro)
         {
 
-            var parametro = _aquarioParametroRepository.BuscarParametroPorTipo(novoAquarioParametro.TipoParametro);
+            var parametro = _parametroRepository.BuscarParametroPorTipo(novoAquarioParametro.TipoParametro);
             var aquario = _aquarioRepository.RecuperarPorId(novoAquarioParametro.IdAquario);
 
             if (parametro == null)
@@ -42,7 +40,7 @@ namespace Projeto_Nemo.Services
                 ParametrosId = parametro.Id
             };
 
-            _aquarioParametroRepository.AdicionarParametroAoAquario(aquarioParametro);
+            _parametroRepository.AdicionarParametroAoAquario(aquarioParametro);
         }
     }
 }

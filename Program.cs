@@ -38,14 +38,14 @@ namespace Projeto_Nemo
                 });
 
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                    {
-                        Name = "Authorization",
-                        Type = SecuritySchemeType.ApiKey,
-                        Scheme = "Bearer",
-                        BearerFormat = "JWT",
-                        In = ParameterLocation.Header,
-                        Description = "Token JWT Header usando o esquema Bearer. Exemplo: `Bearer Token-JWT-Gerado`"
-                    }
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Token JWT Header usando o esquema Bearer. Exemplo: `Bearer Token-JWT-Gerado`"
+                }
                 );
 
                 options.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -91,7 +91,7 @@ namespace Projeto_Nemo
                     IssuerSigningKey =
                         new SymmetricSecurityKey(chave),
                 };
-                
+
                 x.Events = new JwtBearerEvents
                 {
                     OnTokenValidated = context =>
@@ -115,13 +115,13 @@ namespace Projeto_Nemo
             builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             builder.Services.AddScoped<IAquarioRepository, AquarioRepository>();
             builder.Services.AddScoped<IPerfilRepository, PerfilRepository>();
-            builder.Services.AddScoped<IAquarioParametroRepository, AquarioParametroRepository>();
+            builder.Services.AddScoped<IParametroRepository, ParametroRepository>();
 
             // Services
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
             builder.Services.AddScoped<IAquarioService, AquarioService>();
-            builder.Services.AddScoped<IAquarioParametroService, AquarioParametroService>();
+            builder.Services.AddScoped<IParametroService, ParametroService>();
 
             var app = builder.Build();
 
