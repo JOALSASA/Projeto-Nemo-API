@@ -20,6 +20,8 @@ namespace Projeto_Nemo.Controllers
 
         [HttpPost]
         [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult AdicionarParametroAoAquario([FromBody] NovoAquarioParametro novoAquarioParametro)
         {
             _aquarioParametroService.AdicionarParametroAoAquario(novoAquarioParametro);
