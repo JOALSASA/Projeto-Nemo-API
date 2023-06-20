@@ -77,28 +77,5 @@ namespace Projeto_Nemo.Services
             return _aquarioRepository.RecuperarPorUsuarioId(idUsuario, nomeAquario);
         }
 
-        public void CadastrarParametro(NovoAquarioParametro novoAquarioParametro)
-        {
-            Aquario? aquario = _aquarioRepository.RecuperarPorId(novoAquarioParametro.AquariosId);
-
-            if (aquario == null)
-            {
-                throw new NotFoundException("Aquário não encontrado!");
-            }
-
-            if (novoAquarioParametro.ParametrosId == 0)
-            {
-                throw new NotFoundException("Parametro não encontrado!");
-            }
-
-            AquarioParametro aquarioParametro = new AquarioParametro
-            {
-                Valor = novoAquarioParametro.Valor,
-                ParametrosId = novoAquarioParametro.ParametrosId,
-                AquariosId = novoAquarioParametro.AquariosId
-            };
-
-            _aquarioRepository.CadastrarParametro(aquarioParametro);
-        }
     }
 }

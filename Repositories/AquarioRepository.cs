@@ -48,10 +48,5 @@ namespace Projeto_Nemo.Repositories
             return aquario;
         }
 
-        public void CadastrarParametro(AquarioParametro aquarioParametro)
-        {
-            _dbContext.AquarioParametros.Add(aquarioParametro);
-            _dbContext.SaveChanges();
-        }
     }
 }

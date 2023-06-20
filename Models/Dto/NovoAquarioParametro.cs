@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Projeto_Nemo.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace Projeto_Nemo.Models.Dto
 {
@@ -7,7 +8,7 @@ namespace Projeto_Nemo.Models.Dto
         [Required(ErrorMessage = "Aquário é requerido.", AllowEmptyStrings = false)]
         public int AquariosId { get; set; }
         [Required(ErrorMessage = "Parametro é requerido.", AllowEmptyStrings = false)]
-        public int ParametrosId { get; set; }
+        public TipoParametro TipoParametro { get; set; }
         [Required(ErrorMessage = "Valor é requerido.", AllowEmptyStrings = false)]
         public int Valor { get; set; }
     }

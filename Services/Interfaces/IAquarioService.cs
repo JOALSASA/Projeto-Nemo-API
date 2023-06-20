@@ -9,6 +9,5 @@ namespace Projeto_Nemo.Services.Interfaces
         Aquario RecuperarPorId(int id);
         Aquario Alterar(int id, EditarAquarioForm editarAquario);
         List<Aquario> ListarAquarios(int idUsuario, string? nomeAquario);
-        void CadastrarParametro(NovoAquarioParametro novoAquarioParametro);
     }
 }

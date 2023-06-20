@@ -62,16 +62,5 @@ namespace Projeto_Nemo.Controllers
             List<Aquario> aquariosUsuario = _aquarioService.ListarAquarios(usuarioLogado.Id, nomeAquario);
             return Ok(aquariosUsuario.Select(aquario => new AquarioDto(aquario)).ToList());
         }
-
-        [HttpPost]
-        [Route("parametro")]
-        [AllowAnonymous]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult CadastrarParametro([FromBody] NovoAquarioParametro novoAquarioParametro)
-        {
-            _aquarioService.CadastrarParametro(novoAquarioParametro);
-            return Ok();
-        }
     }
 }
