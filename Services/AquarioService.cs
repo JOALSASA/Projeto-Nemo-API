@@ -76,5 +76,6 @@ namespace Projeto_Nemo.Services
         {
             return _aquarioRepository.RecuperarPorUsuarioId(idUsuario, nomeAquario);
         }
+
     }
 }
