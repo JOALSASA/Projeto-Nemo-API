@@ -1,6 +1,7 @@
 using Projeto_Nemo.Exceptions;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Dto;
+using Projeto_Nemo.Models.Enums;
 using Projeto_Nemo.Repositories.Interfaces;
 using Projeto_Nemo.Services.Interfaces;
 
@@ -41,6 +42,18 @@ namespace Projeto_Nemo.Services
             };
 
             _parametroRepository.AdicionarParametroAoAquario(aquarioParametro);
+        }
+
+        public void ExcluirParametroDoAquario(int idAquarioParametro)
+        {
+            var aquarioParametro = _parametroRepository.BuscarAquarioParametroPorId(idAquarioParametro);
+
+            if (aquarioParametro == null)
+            {
+                throw new NotFoundException("Parâmetro não encontrado no aquário.");
+            }
+
+            _parametroRepository.ExcluirParametroDoAquario(aquarioParametro);
         }
     }
 }

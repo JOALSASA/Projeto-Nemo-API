@@ -27,5 +27,15 @@ namespace Projeto_Nemo.Controllers
             _parametroService.AdicionarParametroAoAquario(novoAquarioParametro);
             return Ok();
         }
+
+        [HttpDelete("AquarioParaemtro/{id:int}")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult DeletarParametroDoAquario(int id)
+        {
+            _parametroService.ExcluirParametroDoAquario(id);
+            return NoContent();
+        }
     }
 }

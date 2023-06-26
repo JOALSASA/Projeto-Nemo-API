@@ -26,5 +26,16 @@ namespace Projeto_Nemo.Repositories
         {
             return _dbContext.Parametros.FirstOrDefault(p => p.Tipo == tipoParametro);
         }
+
+        public void ExcluirParametroDoAquario(AquarioParametro aquarioParametro)
+        {
+            _dbContext.AquarioParametros.Remove(aquarioParametro);
+            _dbContext.SaveChanges();
+        }
+
+        public AquarioParametro? BuscarAquarioParametroPorId(int idAquarioParametro)
+        {
+            return _dbContext.AquarioParametros.Where(ap => ap.Id.Equals(idAquarioParametro)).FirstOrDefault();
+        }
     }
 }
