@@ -33,9 +33,10 @@ namespace Projeto_Nemo.Repositories
             _dbContext.SaveChanges();
         }
 
-        public AquarioParametro? BuscarAquarioParametroPorId(int idAquarioParametro)
+        public AquarioParametro? BuscarAquarioParametro(int idAquario, int idParametro)
         {
-            return _dbContext.AquarioParametros.Where(ap => ap.Id.Equals(idAquarioParametro)).FirstOrDefault();
+            return _dbContext.AquarioParametros.Where(ap => ap.AquariosId == idAquario && ap.ParametrosId == idParametro).FirstOrDefault();
+            //return _dbContext.AquarioParametros.Where(ap => ap.Id.Equals(idAquarioParametro)).FirstOrDefault();
         }
     }
 }

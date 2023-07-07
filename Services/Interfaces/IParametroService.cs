@@ -6,6 +6,6 @@ namespace Projeto_Nemo.Services.Interfaces
     public interface IParametroService
     {
         void AdicionarParametroAoAquario(NovoAquarioParametro novoAquarioParametro);
-        void ExcluirParametroDoAquario(int idAquarioParametro);
+        void ExcluirParametroDoAquario(int idAquario, int idParametro);
     }
 }

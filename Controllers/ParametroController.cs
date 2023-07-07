@@ -6,7 +6,7 @@ using Projeto_Nemo.Services.Interfaces;
 namespace Projeto_Nemo.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/")]
     [Authorize]
     public class ParametroController : ControllerBase
     {
@@ -28,13 +28,13 @@ namespace Projeto_Nemo.Controllers
             return Ok();
         }
 
-        [HttpDelete("AquarioParaemtro/{id:int}")]
+        [HttpDelete("aquario/{idAquario:int}/parametro/{idParametro:int}")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult DeletarParametroDoAquario(int id)
+        public IActionResult DeletarParametroDoAquario(int idAquario, int idParametro)
         {
-            _parametroService.ExcluirParametroDoAquario(id);
+            _parametroService.ExcluirParametroDoAquario(idAquario, idParametro);
             return NoContent();
         }
     }

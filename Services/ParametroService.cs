@@ -44,9 +44,9 @@ namespace Projeto_Nemo.Services
             _parametroRepository.AdicionarParametroAoAquario(aquarioParametro);
         }
 
-        public void ExcluirParametroDoAquario(int idAquarioParametro)
+        public void ExcluirParametroDoAquario(int idAquario, int idParametro)
         {
-            var aquarioParametro = _parametroRepository.BuscarAquarioParametroPorId(idAquarioParametro);
+            var aquarioParametro = _parametroRepository.BuscarAquarioParametro(idAquario, idParametro);
 
             if (aquarioParametro == null)
             {
