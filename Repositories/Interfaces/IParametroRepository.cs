@@ -7,5 +7,7 @@ namespace Projeto_Nemo.Repositories.Interfaces
     {
         Parametro? BuscarParametroPorTipo(TipoParametro tipoParametro);
         void AdicionarParametroAoAquario(AquarioParametro aquarioParametro);
+        void ExcluirParametroDoAquario(AquarioParametro aquarioParametro);
+        AquarioParametro? BuscarAquarioParametro(int idAquario, int idParametro);
     }
 }
