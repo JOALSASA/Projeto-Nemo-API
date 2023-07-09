@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Projeto_Nemo.Data;
+using Projeto_Nemo.Exceptions;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Enums;
 using Projeto_Nemo.Repositories.Interfaces;
@@ -8,7 +9,6 @@ namespace Projeto_Nemo.Repositories
 {
     public class ParametroRepository : IParametroRepository
     {
-
         private readonly NemoDbContext _dbContext;
 
         public ParametroRepository(NemoDbContext dbContext)
@@ -33,10 +33,17 @@ namespace Projeto_Nemo.Repositories
             _dbContext.SaveChanges();
         }
 
-        public AquarioParametro? BuscarAquarioParametro(int idAquario, int idParametro)
+        public AquarioParametro? BuscarAquarioParametro(int idAquarioParametro)
         {
-            return _dbContext.AquarioParametros.Where(ap => ap.AquariosId == idAquario && ap.ParametrosId == idParametro).FirstOrDefault();
-            //return _dbContext.AquarioParametros.Where(ap => ap.Id.Equals(idAquarioParametro)).FirstOrDefault();
+            return _dbContext.AquarioParametros
+                .Where(ap => ap.Id == idAquarioParametro).FirstOrDefault();
+        }
+
+        public List<AquarioParametro> ParametrosDoAquario(int idAquario)
+        {
+            return _dbContext.AquarioParametros
+                .Include(ap => ap.Parametro)
+                .Where(ap => ap.AquariosId == idAquario).ToList();
         }
     }
 }

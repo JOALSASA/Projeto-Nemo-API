@@ -37,5 +37,15 @@ namespace Projeto_Nemo.Controllers
             _parametroService.ExcluirParametroDoAquario(idAquario, idParametro);
             return NoContent();
         }
+
+        [HttpGet("aquario/{idAquario:int}/parametro/todos")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult ParametrosDoAquario(int idAquario)
+        {
+            return Ok(_parametroService.ParametrosDoAquario(idAquario).Select(ap => new AquarioParametroDto(ap))
+                .ToList());
+        }
     }
 }
