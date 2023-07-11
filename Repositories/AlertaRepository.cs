@@ -19,6 +19,11 @@ public class AlertaRepository : IAlertaRepository
         _dbContext.SaveChanges();
     }
 
+    public List<Alerta> ConsultarTodosOsAlertas()
+    {
+        return _dbContext.Alertas.Include(a => a.Aquario).Include(a => a.AquarioParametro.Parametro).ToList();
+    }
+
     public List<Alerta> ConsultarAlertasDoAquario(int idAquario)
     {
         return _dbContext.Alertas.

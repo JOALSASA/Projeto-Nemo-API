@@ -29,6 +29,16 @@ namespace Projeto_Nemo.Controllers
         }
         
         [HttpGet]
+        [Route("ConsultarAlertas")]
+        [AllowAnonymous]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult ConsultarTodosOsAlertas()
+        {
+            return Ok(_alertaService.ConsultarTodosOsAlertas().Select(a => new AlertaDto(a)).ToList());
+        }
+        
+        [HttpGet]
         [Route("ConsultarAlertas/{idAquario:int}")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]

@@ -48,6 +48,11 @@ namespace Projeto_Nemo.Services
             _alertaRepository.AdicionarAlerta(novoAlerta);
         }
 
+        public List<Alerta> ConsultarTodosOsAlertas()
+        {
+            return _alertaRepository.ConsultarTodosOsAlertas();
+        }
+
         public List<Alerta> ConsultarAlertasDoAquario(int idAquario)
         {
             return _alertaRepository.ConsultarAlertasDoAquario(idAquario);
