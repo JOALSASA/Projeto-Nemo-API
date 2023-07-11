@@ -23,6 +23,7 @@ namespace Projeto_Nemo.Models.Dto
             Nome = alerta.Nome;
             Min = alerta.Min;
             Max = alerta.Max;
+            EstadoAlerta = alerta.EstadoAlerta;
             NomeAquario = alerta.Aquario.Nome;
             TipoParametro = alerta.AquarioParametro.Parametro.Tipo.ToString();
         }
