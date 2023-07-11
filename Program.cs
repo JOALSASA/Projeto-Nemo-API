@@ -116,12 +116,14 @@ namespace Projeto_Nemo
             builder.Services.AddScoped<IAquarioRepository, AquarioRepository>();
             builder.Services.AddScoped<IPerfilRepository, PerfilRepository>();
             builder.Services.AddScoped<IParametroRepository, ParametroRepository>();
+            builder.Services.AddScoped<IAlertaRepository, AlertaRepository>();
 
             // Services
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IUsuarioService, UsuarioService>();
             builder.Services.AddScoped<IAquarioService, AquarioService>();
             builder.Services.AddScoped<IParametroService, ParametroService>();
+            builder.Services.AddScoped<IAlertaService, AlertaService>();
 
             var app = builder.Build();
 
