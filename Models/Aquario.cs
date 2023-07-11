@@ -9,6 +9,7 @@
         public int Comprimento { get; set; }
 
         public Usuario Usuario { get; set;} = null!;
+        public List<Alerta> Alertas { get; set; } = new();
         public List<AquarioParametro> AquarioParametros { get; set; } = new();
         public List<UsuarioAquario> UsuarioAquarios { get; set; } = new();
     }

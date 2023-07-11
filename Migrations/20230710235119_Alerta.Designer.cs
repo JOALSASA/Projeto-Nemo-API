@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projeto_Nemo.Data;
 
@@ -11,9 +12,11 @@ using Projeto_Nemo.Data;
 namespace Projeto_Nemo.Migrations
 {
     [DbContext(typeof(NemoDbContext))]
-    partial class NemoDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230710235119_Alerta")]
+    partial class Alerta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -71,7 +74,7 @@ namespace Projeto_Nemo.Migrations
 
                     b.HasIndex("AquarioParametroId");
 
-                    b.ToTable("Alertas");
+                    b.ToTable("Alerta");
                 });
 
             modelBuilder.Entity("Projeto_Nemo.Models.Aquario", b =>

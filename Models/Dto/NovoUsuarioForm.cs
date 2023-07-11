@@ -5,7 +5,7 @@ namespace Projeto_Nemo.Models.Dto
     {
         [Required(ErrorMessage = "Nome de usuário é requerido.", AllowEmptyStrings = false)]
         public String NomeUsuario { get; set; } = null!;
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "Email inválido")]
         [Required(ErrorMessage = "Email é requerido.", AllowEmptyStrings = false)]
         public String Email { get; set; } = null!;
         [Required(ErrorMessage = "Senha requerida", AllowEmptyStrings = false)]

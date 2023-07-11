@@ -41,6 +41,11 @@ namespace Projeto_Nemo.Data
                 .HasMany(u => u.ListaHistoricos)
                 .WithOne(h => h.Usuario)
                 .OnDelete(DeleteBehavior.Restrict);
+            
+            modelBuilder.Entity<Aquario>()
+                .HasMany(u => u.Alertas)
+                .WithOne(h => h.Aquario)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Usuario>().HasIndex(u => u.Email).IsUnique();
             modelBuilder.Entity<Usuario>().HasIndex(u => u.NomeUsuario).IsUnique();
@@ -49,6 +54,11 @@ namespace Projeto_Nemo.Data
                 .Entity<Parametro>()
                 .Property(p => p.Tipo)
                 .HasConversion(new EnumToStringConverter<TipoParametro>());
+            
+            modelBuilder
+                .Entity<Alerta>()
+                .Property(a => a.EstadoAlerta)
+                .HasConversion(new EnumToStringConverter<EstadoAlerta>());
 
             // Configurações de propriedades
             modelBuilder.Entity<Usuario>().Property(u => u.NomeUsuario).HasMaxLength(100).IsRequired();
@@ -59,6 +69,7 @@ namespace Projeto_Nemo.Data
         public DbSet<Historico> Historicos { get; set; } = default!;
         public DbSet<Parametro> Parametros { get; set; } = default!;
         public DbSet<Perfil> Perfis { get; set; } = default!;
+        public DbSet<Alerta> Alertas { get; set; } = default!;
         public DbSet<AquarioParametro> AquarioParametros { get; set; } = default!;
     }
 }
