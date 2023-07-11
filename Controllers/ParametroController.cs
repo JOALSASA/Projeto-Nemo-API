@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Dto;
 using Projeto_Nemo.Services.Interfaces;
 
@@ -18,7 +19,7 @@ namespace Projeto_Nemo.Controllers
         }
 
         [HttpPost]
-        [Route("AquarioParametro")]
+        [Route("aquario-parametro")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -44,8 +45,22 @@ namespace Projeto_Nemo.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult ParametrosDoAquario(int idAquario)
         {
-            return Ok(_parametroService.ParametrosDoAquario(idAquario).Select(ap => new AquarioParametroDto(ap))
-                .ToList());
+            List<AquarioParametro> aquarioParametros = _parametroService.ParametrosDoAquario(idAquario);
+            
+            List<AquarioParametroDto> aquarioParametroDtos = aquarioParametros
+                .Select(ap => new AquarioParametroDto(ap))
+                .ToList();
+            
+            return Ok(aquarioParametroDtos);
+        }
+
+        [HttpPut("aquario-parametro/{idAquarioParametro:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult AtualizarValorAquarioParametro(int idAquarioParametro, int valor)
+        {
+            _parametroService.AtualizarValorAquarioParametro(idAquarioParametro, valor);
+            return NoContent();
         }
     }
 }

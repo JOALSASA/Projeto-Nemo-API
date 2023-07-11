@@ -117,6 +117,7 @@ namespace Projeto_Nemo
             builder.Services.AddScoped<IPerfilRepository, PerfilRepository>();
             builder.Services.AddScoped<IParametroRepository, ParametroRepository>();
             builder.Services.AddScoped<IAlertaRepository, AlertaRepository>();
+            builder.Services.AddScoped<IHistoricoRepository, HistoricoRepository>();
 
             // Services
             builder.Services.AddScoped<ITokenService, TokenService>();

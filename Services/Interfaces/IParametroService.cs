@@ -9,5 +9,6 @@ namespace Projeto_Nemo.Services.Interfaces
         void AdicionarParametroAoAquario(NovoAquarioParametro novoAquarioParametro);
         void ExcluirParametroDoAquario(int idAquario, int idAquarioParametro);
         List<AquarioParametro> ParametrosDoAquario(int idAquario);
+        void AtualizarValorAquarioParametro(int idAquarioParametro, int valor);
     }
 }
