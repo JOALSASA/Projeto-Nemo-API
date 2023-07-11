@@ -11,12 +11,10 @@ namespace Projeto_Nemo.Services
     public class AquarioService : IAquarioService
     {
         private readonly IAquarioRepository _aquarioRepository;
-        private readonly IUsuarioService _usuarioService;
         
-        public AquarioService(IAquarioRepository aquarioRepository, IUsuarioService usuarioService)
+        public AquarioService(IAquarioRepository aquarioRepository)
         {
             _aquarioRepository = aquarioRepository;
-            _usuarioService = usuarioService;
         }
         
         public Aquario Inserir(NovoAquarioForm novoAquario, Usuario usuario)
@@ -87,20 +85,6 @@ namespace Projeto_Nemo.Services
                 throw new NotFoundException("Aquário não encontrado.");
             }
             _aquarioRepository.Excluir(aquario);
-        }
-
-        public void PartilharAquarioComUsuario(int idAquario, int idUsuario)
-        {
-            var usuario = _usuarioService.RecuperarPorId(idUsuario);
-            var aquario = RecuperarPorId(idAquario);
-
-            UsuarioAquario usuarioAquario = new UsuarioAquario
-            {
-                Usuario = usuario,
-                Aquario = aquario
-            };
-
-            _aquarioRepository.PartilharAquarioComUsuario(usuarioAquario);
         }
     }
 }

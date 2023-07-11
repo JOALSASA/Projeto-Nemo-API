@@ -9,6 +9,5 @@ namespace Projeto_Nemo.Repositories.Interfaces
         void Excluir(Aquario aquario);
         Aquario? RecuperarPorId(int id);
         List<Aquario> RecuperarPorUsuarioId(int id, string? nomeAquario);
-        void PartilharAquarioComUsuario(UsuarioAquario usuarioAquario);
     }
 }
