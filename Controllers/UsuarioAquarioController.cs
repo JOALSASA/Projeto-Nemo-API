@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Projeto_Nemo.Models;
+using Projeto_Nemo.Models.Dto;
 using Projeto_Nemo.Services.Interfaces;
 
 namespace Projeto_Nemo.Controllers
@@ -28,11 +29,11 @@ namespace Projeto_Nemo.Controllers
         }
 
         [HttpGet("aquario/{idAquario:int}/usuario/{idUsuario:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioAquarioDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<UsuarioAquario> BuscarPorId(int idAquario, int idUsuario)
+        public ActionResult<UsuarioAquarioDto> BuscarPorId(int idAquario, int idUsuario)
         {
-            return Ok(_usuarioAquarioService.BuscarUsuarioAquarioPorIds(idAquario, idUsuario));
+            return Ok( new UsuarioAquarioDto(_usuarioAquarioService.BuscarUsuarioAquarioPorIds(idAquario, idUsuario)));
         }
     }
 }

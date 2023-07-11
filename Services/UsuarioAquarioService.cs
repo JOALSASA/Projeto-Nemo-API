@@ -39,13 +39,14 @@ namespace Projeto_Nemo.Services
             _usuarioAquarioRepository.PartilharAquarioComUsuario(usuarioAquario);
         }
 
-        public UsuarioAquario? BuscarUsuarioAquarioPorIds(int idAquario, int idUsuario)
+        public UsuarioAquario BuscarUsuarioAquarioPorIds(int idAquario, int idUsuario)
         {
+
             var usuarioAquario = _usuarioAquarioRepository.BuscarUsuarioAquarioPorIds(idAquario, idUsuario);
 
             if (usuarioAquario == null)
             {
-                throw new NotFoundException("O usuário não tem acesso a este aquário.");
+                throw new NotFoundException("Usuário/Aquário não encontrado.");
             }
 
             return usuarioAquario;
