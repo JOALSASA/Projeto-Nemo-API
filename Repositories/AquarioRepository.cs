@@ -49,5 +49,10 @@ namespace Projeto_Nemo.Repositories
             return aquario;
         }
 
+        public void PartilharAquarioComUsuario(UsuarioAquario usuarioAquario)
+        {
+            _dbContext.UsuarioAquarios.Add(usuarioAquario);
+            _dbContext.SaveChanges();
+        }
     }
 }

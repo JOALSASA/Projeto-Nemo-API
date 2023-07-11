@@ -10,5 +10,6 @@ namespace Projeto_Nemo.Services.Interfaces
         Aquario Alterar(int id, EditarAquarioForm editarAquario);
         List<Aquario> ListarAquarios(int idUsuario, string? nomeAquario);
         void ExcluirAquario(Usuario usuario, int idAquario);
+        void PartilharAquarioComUsuario(int idAquario, int idUsuario);
     }
 }

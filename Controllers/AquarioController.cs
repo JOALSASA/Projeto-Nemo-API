@@ -72,5 +72,14 @@ namespace Projeto_Nemo.Controllers
             _aquarioService.ExcluirAquario(usuarioLogado, idAquario);
             return NoContent();
         }
+
+        [HttpPost("{idAquario:int}/usuario/{idUsuario:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult PartilharAquarioComUsuario (int idAquario, int idUsuario) 
+        {
+            _aquarioService.PartilharAquarioComUsuario(idAquario, idUsuario);
+            return NoContent();
+        }
     }
 }

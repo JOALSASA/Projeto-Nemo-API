@@ -71,5 +71,6 @@ namespace Projeto_Nemo.Data
         public DbSet<Perfil> Perfis { get; set; } = default!;
         public DbSet<Alerta> Alertas { get; set; } = default!;
         public DbSet<AquarioParametro> AquarioParametros { get; set; } = default!;
+        public DbSet<UsuarioAquario> UsuarioAquarios { get; set; } = default;
     }
 }
