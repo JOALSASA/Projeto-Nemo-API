@@ -26,16 +26,16 @@ namespace Projeto_Nemo.Data
                .HasForeignKey(ap => ap.ParametrosId);
 
             modelBuilder.Entity<UsuarioAquario>()
-               .HasOne(u => u.Usuario)
-               .WithMany(ua => ua.UsuarioAquarios)
-               .HasForeignKey(ua => ua.AquariosId)
-               .OnDelete(DeleteBehavior.Restrict);
+                .HasOne(u => u.Usuario)
+                .WithMany(ua => ua.UsuarioAquarios)
+                .HasForeignKey(u => u.UsuariosId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<UsuarioAquario>()
-               .HasOne(a => a.Aquario)
-               .WithMany(ua => ua.UsuarioAquarios)
-               .HasForeignKey(ua => ua.UsuariosId)
-               .OnDelete(DeleteBehavior.Restrict);
+                .HasOne(u => u.Aquario)
+                .WithMany(ua => ua.UsuarioAquarios)
+                .HasForeignKey(u => u.AquariosId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Usuario>()
                 .HasMany(u => u.ListaHistoricos)
