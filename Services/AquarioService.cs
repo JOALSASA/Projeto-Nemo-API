@@ -76,7 +76,7 @@ namespace Projeto_Nemo.Services
         {
             return _aquarioRepository.RecuperarPorUsuarioId(idUsuario, nomeAquario);
         }
-
+        
         public void ExcluirAquario(Usuario usuario ,int idAquario)
         {
             var aquario = _aquarioRepository.RecuperarPorId(idAquario);
