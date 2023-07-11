@@ -68,7 +68,7 @@ namespace Projeto_Nemo.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeletarAquario(int idAquario)
         {
-            Usuario? usuarioLogado = _httpContextAccessor.HttpContext.Items["User"] as Usuario;
+            Usuario usuarioLogado = _usuarioService.RecuperarUsuarioAutenticado();
             _aquarioService.ExcluirAquario(usuarioLogado, idAquario);
             return NoContent();
         }
