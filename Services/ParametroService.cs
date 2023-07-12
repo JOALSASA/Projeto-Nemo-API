@@ -95,5 +95,11 @@ namespace Projeto_Nemo.Services
             _historicoRepository.SaveChanges();
             _parametroRepository.SaveChanges();
         }
+
+        public List<Historico> BuscarHistoricoAquarioParametro(int idAquarioParametro)
+        {
+            DateTime dataLimite = DateTime.Now.AddHours(-24);
+            return _historicoRepository.BuscarUltimosHistoricoAquarioParametro(idAquarioParametro, dataLimite);
+        }
     }
 }

@@ -1,6 +1,5 @@
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Dto;
-using Projeto_Nemo.Models.Enums;
 
 namespace Projeto_Nemo.Services.Interfaces
 {
@@ -10,5 +9,6 @@ namespace Projeto_Nemo.Services.Interfaces
         void ExcluirParametroDoAquario(int idAquario, int idAquarioParametro);
         List<AquarioParametro> ParametrosDoAquario(int idAquario);
         void AtualizarValorAquarioParametro(int idAquarioParametro, int valor);
+        List<Historico> BuscarHistoricoAquarioParametro(int idAquarioParametro);
     }
 }

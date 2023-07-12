@@ -55,12 +55,22 @@ namespace Projeto_Nemo.Controllers
         }
 
         [HttpPut("aquario-parametro/{idAquarioParametro:int}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult AtualizarValorAquarioParametro(int idAquarioParametro, int valor)
         {
             _parametroService.AtualizarValorAquarioParametro(idAquarioParametro, valor);
             return NoContent();
+        }
+        
+        [HttpGet("aquario-parametro/{idAquarioParametro:int}/historico")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult BuscarHistoricoAquarioParametro(int idAquarioParametro)
+        {
+            List<Historico> historicos = _parametroService.BuscarHistoricoAquarioParametro(idAquarioParametro);
+            List<HistoricoDto> historicoDtos = historicos.Select(historico => new HistoricoDto(historico)).ToList();
+            return Ok(historicoDtos);
         }
     }
 }
