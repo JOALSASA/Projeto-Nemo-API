@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Projeto_Nemo.Data;
-using Projeto_Nemo.Exceptions;
 using Projeto_Nemo.Models;
 using Projeto_Nemo.Models.Enums;
 using Projeto_Nemo.Repositories.Interfaces;
@@ -19,7 +18,6 @@ namespace Projeto_Nemo.Repositories
         public void AdicionarParametroAoAquario(AquarioParametro aquarioParametro)
         {
             _dbContext.AquarioParametros.Add(aquarioParametro);
-            _dbContext.SaveChanges();
         }
 
         public Parametro? BuscarParametroPorTipo(TipoParametro tipoParametro)
@@ -30,7 +28,6 @@ namespace Projeto_Nemo.Repositories
         public void ExcluirParametroDoAquario(AquarioParametro aquarioParametro)
         {
             _dbContext.AquarioParametros.Remove(aquarioParametro);
-            _dbContext.SaveChanges();
         }
 
         public AquarioParametro? BuscarAquarioParametro(int idAquarioParametro)
@@ -44,6 +41,16 @@ namespace Projeto_Nemo.Repositories
             return _dbContext.AquarioParametros
                 .Include(ap => ap.Parametro)
                 .Where(ap => ap.AquariosId == idAquario).ToList();
+        }
+
+        public void AtualizarParametro(AquarioParametro aquarioParametro)
+        {
+            _dbContext.AquarioParametros.Update(aquarioParametro);
+        }
+
+        public void SaveChanges()
+        {
+            _dbContext.SaveChanges();
         }
     }
 }
