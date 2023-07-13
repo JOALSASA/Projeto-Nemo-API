@@ -15,6 +15,11 @@ namespace Projeto_Nemo.Repositories
             _dbContext = dbContext;
         }
 
+        public Parametro? BuscarParametroPorId(int idParametro)
+        {
+            return _dbContext.Parametros.FirstOrDefault(parametro => parametro.Id == idParametro);
+        }
+
         public void AdicionarParametroAoAquario(AquarioParametro aquarioParametro)
         {
             _dbContext.AquarioParametros.Add(aquarioParametro);

@@ -46,6 +46,7 @@ namespace Projeto_Nemo.Services
             };
 
             _alertaRepository.AdicionarAlerta(novoAlerta);
+            _alertaRepository.SaveChanges();
         }
 
         public List<Alerta> ConsultarTodosOsAlertas()
@@ -71,6 +72,7 @@ namespace Projeto_Nemo.Services
             alertaAntigo.Min = novoAlertaForm.Min;
 
             _alertaRepository.AlterarAlerta(alertaAntigo);
+            _alertaRepository.SaveChanges();
         }
 
         public void ExcluirAlertaDoAquario(int idAlerta)
@@ -82,6 +84,7 @@ namespace Projeto_Nemo.Services
             }
 
             _alertaRepository.ExcluirAlertaDoAquario(alerta);
+            _alertaRepository.SaveChanges();
         }
     }
 }
