@@ -6,5 +6,9 @@ namespace Projeto_Nemo.Repositories.Interfaces
     {
         void PartilharAquarioComUsuario(UsuarioAquario usuarioAquario);
         UsuarioAquario? BuscarUsuarioAquarioPorIds(int idAquario, int idUsuario);
+        UsuarioAquario? BuscarUsuarioAquarioPorId(int idUsuarioAquario);
+        List<UsuarioAquario> BuscarTodosUsuariosPermissao(int idAquario);
+        void ExcluirUsuarioAutorizado(UsuarioAquario usuarioAquario);
+        void SaveChanges();
     }
 }

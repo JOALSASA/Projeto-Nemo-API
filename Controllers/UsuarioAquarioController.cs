@@ -13,7 +13,7 @@ namespace Projeto_Nemo.Controllers
     {
         private readonly IUsuarioAquarioService _usuarioAquarioService;
 
-        public UsuarioAquarioController (IUsuarioAquarioService usuarioAquarioService)
+        public UsuarioAquarioController(IUsuarioAquarioService usuarioAquarioService)
         {
             _usuarioAquarioService = usuarioAquarioService;
         }
@@ -33,7 +33,29 @@ namespace Projeto_Nemo.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<UsuarioAquarioDto> BuscarPorId(int idAquario, int idUsuario)
         {
-            return Ok( new UsuarioAquarioDto(_usuarioAquarioService.BuscarUsuarioAquarioPorIds(idAquario, idUsuario)));
+            return Ok(new UsuarioAquarioDto(_usuarioAquarioService.BuscarUsuarioAquarioPorIds(idAquario, idUsuario)));
+        }
+
+        [HttpGet("aquario/{idAquario:int}/usuarios")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UsuarioAquarioDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<List<UsuarioDto>> BuscarTodosUsuariosPermissao(int idAquario)
+        {
+            List<UsuarioAquario> usuarioAquarios = _usuarioAquarioService.BuscarTodosUsuariosPermissao(idAquario);
+            List<UsuarioDto> usuarioDtos = usuarioAquarios
+                .Select(usuarioAquario => new UsuarioDto(usuarioAquario.Usuario))
+                .ToList();
+
+            return Ok(usuarioDtos);
+        }
+
+        [HttpDelete("aquario/{idAquario:int}/usuario/{idUsuario:int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent, Type = typeof(UsuarioAquarioDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult ExcluirUsuarioAquario(int idAquario, int idUsuario)
+        {
+            _usuarioAquarioService.ExcluirUsuarioAutorizado(idAquario, idUsuario);
+            return NoContent();
         }
     }
 }

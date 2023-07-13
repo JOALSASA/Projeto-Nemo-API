@@ -1,4 +1,5 @@
 ﻿using Projeto_Nemo.Models;
+using Projeto_Nemo.Models.Dto;
 
 namespace Projeto_Nemo.Services.Interfaces
 {
@@ -6,5 +7,7 @@ namespace Projeto_Nemo.Services.Interfaces
     {
         void PartilharAquarioComUsuario(int idAquario, int idUsuario);
         UsuarioAquario BuscarUsuarioAquarioPorIds(int idAquario, int idUsuario);
+        List<UsuarioAquario> BuscarTodosUsuariosPermissao(int idAquario);
+        void ExcluirUsuarioAutorizado(int idAquario, int idUsuario);
     }
 }

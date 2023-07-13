@@ -17,8 +17,8 @@ namespace Projeto_Nemo.Repositories
         public void PartilharAquarioComUsuario(UsuarioAquario usuarioAquario)
         {
             _dbContext.UsuarioAquarios.Add(usuarioAquario);
-            _dbContext.SaveChanges();
         }
+
         public UsuarioAquario? BuscarUsuarioAquarioPorIds(int idAquario, int idUsuario)
         {
             return _dbContext.UsuarioAquarios
@@ -26,6 +26,32 @@ namespace Projeto_Nemo.Repositories
                 .Include(ua => ua.Usuario)
                 .FirstOrDefault(ua => ua.AquariosId == idAquario && ua.UsuariosId == idUsuario);
             //return _dbContext.UsuarioAquarios.Where(ua => ua.AquariosId == idAquario && ua.UsuariosId == idUsuario).FirstOrDefault();
+        }
+
+        public UsuarioAquario? BuscarUsuarioAquarioPorId(int idUsuarioAquario)
+        {
+            return _dbContext.UsuarioAquarios
+                .Include(ua => ua.Aquario)
+                .Include(ua => ua.Usuario)
+                .FirstOrDefault();
+        }
+
+        public List<UsuarioAquario> BuscarTodosUsuariosPermissao(int idAquario)
+        {
+            return _dbContext.UsuarioAquarios
+                .Include(ua => ua.Usuario)
+                .Where(ua => ua.AquariosId == idAquario)
+                .ToList();
+        }
+
+        public void ExcluirUsuarioAutorizado(UsuarioAquario usuarioAquario)
+        {
+            _dbContext.UsuarioAquarios.Remove(usuarioAquario);
+        }
+
+        public void SaveChanges()
+        {
+            _dbContext.SaveChanges();
         }
     }
 }

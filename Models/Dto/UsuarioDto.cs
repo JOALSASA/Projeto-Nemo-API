@@ -13,5 +13,11 @@
             Email = usuario.Email;
         }
 
+        public UsuarioDto(UsuarioAquario usuarioAquario)
+        {
+            Id = usuarioAquario.Usuario.Id;
+            NomeUsuario = usuarioAquario.Usuario.NomeUsuario;
+            Email = usuarioAquario.Usuario.Email;
+        }
     }
 }
