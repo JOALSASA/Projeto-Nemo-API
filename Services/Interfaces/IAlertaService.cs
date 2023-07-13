@@ -9,5 +9,5 @@ public interface IAlertaService
     List<Alerta> ConsultarTodosOsAlertas();
     List<Alerta> ConsultarAlertasDoAquario(int idAquario);
     void AlterarAlerta(int idAlerta, NovoAlertaForm novoAlertaForm);
-    void ExcluirAlertaDoAquario(int idAlerta);
+    void ExcluirAlertaDoAquario(List<int> idAlertas);
 }

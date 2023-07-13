@@ -60,13 +60,13 @@ namespace Projeto_Nemo.Controllers
         }
         
         [HttpDelete]
-        [Route("ExcluirAlerta/{idAlerta:int}")]
+        [Route("ExcluirAlerta")]
         [AllowAnonymous]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult DeletarParametroDoAquario(int idAlerta)
+        public IActionResult DeletarParametroDoAquario([FromQuery] List<int> idAlertas)
         {
-            _alertaService.ExcluirAlertaDoAquario(idAlerta);
+            _alertaService.ExcluirAlertaDoAquario(idAlertas);
             return NoContent();
         }
         

@@ -43,9 +43,9 @@ public class AlertaRepository : IAlertaRepository
         _dbContext.SaveChanges();
     }
 
-    public void ExcluirAlertaDoAquario(Alerta alerta)
+    public void ExcluirAlertaDoAquario(List<Alerta> alertas)
     {
-        _dbContext.Alertas.Remove(alerta);
+        _dbContext.Alertas.RemoveRange(alertas);
         _dbContext.SaveChanges();
     }
 }

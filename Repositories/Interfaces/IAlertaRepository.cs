@@ -9,5 +9,5 @@ public interface IAlertaRepository
     List<Alerta> ConsultarAlertasDoAquario(int idAquario);
     Alerta BuscarAlertaPeloId(int idAlerta);
     void AlterarAlerta(Alerta alerta);
-    void ExcluirAlertaDoAquario(Alerta alerta);
+    void ExcluirAlertaDoAquario(List<Alerta> alertas);
 }

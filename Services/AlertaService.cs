@@ -73,15 +73,19 @@ namespace Projeto_Nemo.Services
             _alertaRepository.AlterarAlerta(alertaAntigo);
         }
 
-        public void ExcluirAlertaDoAquario(int idAlerta)
+        public void ExcluirAlertaDoAquario(List<int> idAlertas)
         {
-            var alerta = _alertaRepository.BuscarAlertaPeloId(idAlerta);
-            if (alerta == null)
+            List<Alerta> alertas = new List<Alerta>();
+            foreach (int idAlerta in idAlertas)
             {
-                throw new NotFoundException("Alerta não encontrado.");
+                Alerta alerta = _alertaRepository.BuscarAlertaPeloId(idAlerta);
+                if (alerta == null)
+                {
+                    throw new NotFoundException("Alerta não encontrado.");
+                }
+                alertas.Add(alerta);
             }
-
-            _alertaRepository.ExcluirAlertaDoAquario(alerta);
+            _alertaRepository.ExcluirAlertaDoAquario(alertas);
         }
     }
 }
