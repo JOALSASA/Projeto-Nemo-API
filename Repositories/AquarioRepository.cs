@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Projeto_Nemo.Data;
 using Projeto_Nemo.Models;
+using Projeto_Nemo.Models.Dto;
 using Projeto_Nemo.Repositories.Interfaces;
 
 namespace Projeto_Nemo.Repositories
@@ -34,11 +35,23 @@ namespace Projeto_Nemo.Repositories
 
         public List<Aquario> RecuperarPorUsuarioId(int id, string? nomeAquario)
         {
-            if (nomeAquario != null)
+
+            if (nomeAquario != null) 
             {
-                return _dbContext.Aquarios.Where(u => u.Usuario.Id == id & u.Nome.Contains(nomeAquario)).ToList();
+                return _dbContext.Aquarios
+                    .Include(a => a.UsuarioAquarios
+                        .Where(ua => ua.UsuariosId == id))
+                    .Include(a => a.Usuario)
+                        .Where(a => a.Usuario.Id == id && a.Nome.Contains(nomeAquario))
+                    .ToList();
+
             }
-            return _dbContext.Aquarios.Where(u => u.Usuario.Id == id).ToList();
+
+            return _dbContext.Aquarios
+                    .Include(a => a.Usuario)
+                    .Include(a => a.UsuarioAquarios)
+                        .Where(a => a.Usuario.Id == id || a.UsuarioAquarios.Any(ua => ua.UsuariosId == id))
+                    .ToList();
         }
 
         public Aquario Inserir(Aquario aquario)

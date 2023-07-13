@@ -25,7 +25,6 @@ namespace Projeto_Nemo.Repositories
                 .Include(ua => ua.Aquario)
                 .Include(ua => ua.Usuario)
                 .FirstOrDefault(ua => ua.AquariosId == idAquario && ua.UsuariosId == idUsuario);
-            //return _dbContext.UsuarioAquarios.Where(ua => ua.AquariosId == idAquario && ua.UsuariosId == idUsuario).FirstOrDefault();
         }
 
         public UsuarioAquario? BuscarUsuarioAquarioPorId(int idUsuarioAquario)

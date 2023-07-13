@@ -7,6 +7,7 @@ namespace Projeto_Nemo.Models.Dto
         public int Largura { get; set; }
         public int Altura { get; set; }
         public int Comprimento { get; set; }
+        public UsuarioDto Dono { get; set; }
 
         public AquarioDto(Aquario aquario)
         {
@@ -15,6 +16,7 @@ namespace Projeto_Nemo.Models.Dto
             Largura = aquario.Largura;
             Altura = aquario.Altura;
             Comprimento = aquario.Comprimento;
+            Dono = new UsuarioDto(aquario.Usuario);
         }
     }
 }
