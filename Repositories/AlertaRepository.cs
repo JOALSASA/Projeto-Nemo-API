@@ -13,10 +13,10 @@ public class AlertaRepository : IAlertaRepository
     {
         _dbContext = dbContext;
     }
+
     public void AdicionarAlerta(Alerta novoAlerta)
     {
         _dbContext.Alertas.Add(novoAlerta);
-        _dbContext.SaveChanges();
     }
 
     public List<Alerta> ConsultarTodosOsAlertas()
@@ -26,26 +26,35 @@ public class AlertaRepository : IAlertaRepository
 
     public List<Alerta> ConsultarAlertasDoAquario(int idAquario)
     {
-        return _dbContext.Alertas.
-            Include(a => a.Aquario).
-            Include(a => a.AquarioParametro.Parametro).
-            Where(a => a.Aquario.Id == idAquario).ToList();
+        return _dbContext.Alertas.Include(a => a.Aquario).Include(a => a.AquarioParametro.Parametro)
+            .Where(a => a.Aquario.Id == idAquario).ToList();
     }
 
     public Alerta? BuscarAlertaPeloId(int idAlerta)
     {
-       return _dbContext.Alertas.FirstOrDefault(a => a.Id == idAlerta);
+        return _dbContext.Alertas.FirstOrDefault(a => a.Id == idAlerta);
+    }
+
+    public List<Alerta> BuscarAlertaPeloIdAquarioParametro(int idAquarioParametro)
+    {
+        return _dbContext.Alertas
+            .Include(alerta => alerta.AquarioParametro)
+            .Where(alerta => alerta.AquarioParametro.Id == idAquarioParametro)
+            .ToList();
     }
 
     public void AlterarAlerta(Alerta alerta)
     {
         _dbContext.Alertas.Update(alerta);
-        _dbContext.SaveChanges();
     }
 
     public void ExcluirAlertaDoAquario(List<Alerta> alertas)
     {
         _dbContext.Alertas.RemoveRange(alertas);
+    }
+
+    public void SaveChanges()
+    {
         _dbContext.SaveChanges();
     }
 }
