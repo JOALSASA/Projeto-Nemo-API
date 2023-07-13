@@ -118,6 +118,7 @@ namespace Projeto_Nemo
             builder.Services.AddScoped<IParametroRepository, ParametroRepository>();
             builder.Services.AddScoped<IAlertaRepository, AlertaRepository>();
             builder.Services.AddScoped<IHistoricoRepository, HistoricoRepository>();
+            builder.Services.AddScoped<IUsuarioAquarioRepository, UsuarioAquarioRepository>();
 
             // Services
             builder.Services.AddScoped<ITokenService, TokenService>();
@@ -125,6 +126,7 @@ namespace Projeto_Nemo
             builder.Services.AddScoped<IAquarioService, AquarioService>();
             builder.Services.AddScoped<IParametroService, ParametroService>();
             builder.Services.AddScoped<IAlertaService, AlertaService>();
+            builder.Services.AddScoped<IUsuarioAquarioService, UsuarioAquarioService>();
 
             var app = builder.Build();
 

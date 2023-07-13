@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Projeto_Nemo.Data;
 
@@ -11,9 +12,11 @@ using Projeto_Nemo.Data;
 namespace Projeto_Nemo.Migrations
 {
     [DbContext(typeof(NemoDbContext))]
-    partial class NemoDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230711045307_UsuarioAquarios")]
+    partial class UsuarioAquarios
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -340,13 +343,13 @@ namespace Projeto_Nemo.Migrations
 
             modelBuilder.Entity("Projeto_Nemo.Models.UsuarioAquario", b =>
                 {
-                    b.HasOne("Projeto_Nemo.Models.Aquario", "Aquario")
+                    b.HasOne("Projeto_Nemo.Models.Usuario", "Usuario")
                         .WithMany("UsuarioAquarios")
                         .HasForeignKey("AquariosId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Projeto_Nemo.Models.Usuario", "Usuario")
+                    b.HasOne("Projeto_Nemo.Models.Aquario", "Aquario")
                         .WithMany("UsuarioAquarios")
                         .HasForeignKey("UsuariosId")
                         .OnDelete(DeleteBehavior.Restrict)
