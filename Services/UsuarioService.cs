@@ -23,6 +23,20 @@ namespace Projeto_Nemo.Services
 
         public Usuario Inserir(NovoUsuarioForm novoUsuario)
         {
+
+            var usuarioVerificadoPorNome = _usuarioRepository.FindUsuarioByName(novoUsuario.NomeUsuario);
+            var usuarioVerificadoPorEmail = _usuarioRepository.RecuperarPorEmail(novoUsuario.Email);
+
+            if (usuarioVerificadoPorNome != null) 
+            {
+                throw new ConflictException("Este nome de usuário já está em uso.");
+            }
+
+            if (usuarioVerificadoPorEmail != null)
+            {
+                throw new ConflictException("Este e-mail já está em uso.");
+            }
+
             Usuario usuario = new Usuario
             {
                 NomeUsuario = novoUsuario.NomeUsuario,
